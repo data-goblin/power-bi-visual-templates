@@ -1,0 +1,19 @@
+role 'Territory Managers'
+	modelPermission: read
+
+	tablePermission Regions =
+			
+			VAR _CurrentUser =
+			    SELECTCOLUMNS (
+			        FILTER (
+			            'Employees',
+			            'Employees'[Employee Email]
+			                = USERPRINCIPALNAME ( )
+			        ),
+			        "@Name", 'Employees'[Employee Name]
+			    )
+			RETURN
+			    'Regions'[Territory Directors] IN _CurrentUser
+
+	annotation PBI_Id = 6d4eacc1cfdf475eb3dac207196ec47f
+

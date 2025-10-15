@@ -1,0 +1,19 @@
+role 'Brand VPs'
+	modelPermission: read
+
+	tablePermission Brands =
+			
+			VAR _CurrentUser =
+			    SELECTCOLUMNS (
+			        FILTER (
+			            'Employees',
+			            'Employees'[Employee Email]
+			                = USERPRINCIPALNAME ( )
+			        ),
+			        "@Name", 'Employees'[Employee Name]
+			    )
+			RETURN
+			    'Brands'[Product Brand VP] IN _CurrentUser
+
+	annotation PBI_Id = 0b8d41815400413293ab3942e184b53e
+

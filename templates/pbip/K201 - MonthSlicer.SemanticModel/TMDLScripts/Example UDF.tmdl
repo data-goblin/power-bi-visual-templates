@@ -1,0 +1,26 @@
+createOrReplace
+
+
+	/// Compare to a target and return the relative percent
+	/// Example usage: Comparing sales to budget or forecast to get relative performance
+	/// Examples:
+	/// - 9/10  is -10%
+	/// - 11/10 is +10%
+	function 'Comparison.RelativeToTarget' = ```
+			(
+			    // The actual value that you are measuring
+			    actual: SCALAR NUMERIC VAL,
+			    
+			    // The target that you are comparing to
+			    target: SCALAR NUMERIC VAL
+			)
+			=> 
+			    VAR _Actual       = actual
+			    VAR _Target       = target
+			    VAR _Delta        = _Actual - _Target
+			    VAR _Percentage   = DIVIDE ( _Delta, _Target )
+			    RETURN
+			        _Percentage
+			```
+		lineageTag: ff161b0f-f971-4cde-935f-8a820a703132
+

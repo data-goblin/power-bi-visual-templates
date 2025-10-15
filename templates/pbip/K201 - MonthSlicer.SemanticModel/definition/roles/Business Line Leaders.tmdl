@@ -1,0 +1,19 @@
+role 'Business Line Leaders'
+	modelPermission: read
+
+	tablePermission Products =
+			
+			VAR _CurrentUser =
+			    SELECTCOLUMNS (
+			        FILTER (
+			            'Employees',
+			            'Employees'[Employee Email]
+			                = USERPRINCIPALNAME ( )
+			        ),
+			        "@Name", 'Employees'[Employee Name]
+			    )
+			RETURN
+			    'Products'[Product Business Line Leader] IN _CurrentUser
+
+	annotation PBI_Id = b975518cd80041dabbaf5d904a66b92f
+

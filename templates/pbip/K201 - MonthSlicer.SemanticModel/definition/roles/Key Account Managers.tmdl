@@ -1,0 +1,19 @@
+role 'Key Account Managers'
+	modelPermission: read
+
+	tablePermission Customers =
+			
+			VAR _CurrentUser =
+			    SELECTCOLUMNS (
+			        FILTER (
+			            'Employees',
+			            'Employees'[Employee Email]
+			                = USERPRINCIPALNAME ( )
+			        ),
+			        "@Name", 'Employees'[Employee Name]
+			    )
+			RETURN
+			    'Customers'[Key Account Manager] IN _CurrentUser
+
+	annotation PBI_Id = 74b5a908a58f4954b252fd5d2c9cb895
+

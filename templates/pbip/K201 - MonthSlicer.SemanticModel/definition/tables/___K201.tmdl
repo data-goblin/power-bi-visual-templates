@@ -1,0 +1,77 @@
+table ___K201
+	lineageTag: 18bc2f69-79f9-4162-8f8f-ed53fcf792d0
+
+	measure 'Format Color' =
+			VAR _Actual = [Actuals MTD]
+			VAR _Target = [Budget MTD]
+			VAR _GoodColor = "good"
+			VAR _BadColor = "bad"
+			VAR _NeutralColor = "midColor"
+			
+			RETURN
+			IF ( NOT ISBLANK( _Actual ),
+			    IF (
+			        _Actual > _Target,
+			        _GoodColor,
+			        _BadColor
+			    ),
+			    _NeutralColor
+			)
+		formatString: General Text
+		lineageTag: b307d870-c897-447f-b58f-76f856bb9190
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	measure 'Tooltip Color' = ```
+			
+			VAR _CurrentBar = SELECTEDVALUE( '___K201'[Calendar Month (ie Jan)] )
+			VAR _Hovered = CALCULATE( 
+			    SELECTEDVALUE( 'Date'[Calendar Month (ie Jan)] ), 
+			    ALLSELECTED( '___K201' )
+			)
+			VAR _Result = IF( _CurrentBar = _Hovered, [Format Color], "midColor" )
+			RETURN _Result
+			```
+		lineageTag: 5c3e4612-a85a-4d7c-9a01-cb41140ff1f4
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	measure 'OTD % (Value) (Tooltip)' = ```
+			
+			CALCULATE(
+			    [OTD % (Value)],
+			    TREATAS( 
+			        VALUES( '___K201'[Calendar Month (ie Jan)] ), 
+			        'Date'[Calendar Month (ie Jan)] 
+			    )
+			)
+			```
+		formatString: #,0%;-#,0%;#,0%
+		lineageTag: f6eb6798-115b-47c1-aace-36a612b827e5
+
+	column 'Calendar Month (ie Jan)'
+		isHidden
+		lineageTag: c6a990ba-3a35-4b44-9ec1-96f0ca88b459
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Date[Calendar Month (ie Jan)]
+		sortByColumn: 'Calendar Month # (ie 1)'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Calendar Month # (ie 1)'
+		isHidden
+		formatString: 0
+		lineageTag: 3c8df874-6a19-45ce-b11b-5d97ac8d9c40
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: Date[Calendar Month # (ie 1)]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ___K201 = calculated
+		mode: import
+		source = FILTER( SUMMARIZECOLUMNS( 'Date'[Calendar Month (ie Jan)], 'Date'[Calendar Month # (ie 1)] ), NOT ISBLANK( 'Date'[Calendar Month (ie Jan)] ) )
+
+	annotation PBI_Id = 8cf1b2c8d14e4bef8cf79b33c0394aed
+

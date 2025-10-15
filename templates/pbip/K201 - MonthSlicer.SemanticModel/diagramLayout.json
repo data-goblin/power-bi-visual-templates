@@ -1,0 +1,549 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 960.3,
+        "y": 759.2
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 378.2,
+            "y": 0
+          },
+          "nodeIndex": "Orders",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 776.6,
+            "y": 735.6
+          },
+          "nodeIndex": "__Demo Measures",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1174.9,
+            "y": 735.6
+          },
+          "nodeIndex": "__Measures",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2642.3,
+            "y": 829.3
+          },
+          "nodeIndex": "Budget",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2803.7,
+            "y": 364.9
+          },
+          "nodeIndex": "Forecast",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1971.7,
+            "y": 715.9
+          },
+          "nodeIndex": "Invoices",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3439,
+            "y": 821.6
+          },
+          "nodeIndex": "Last Refresh",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1573.3,
+            "y": 1102.2
+          },
+          "nodeIndex": "On-Time Delivery",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3837.4,
+            "y": 821.6
+          },
+          "nodeIndex": "1) Selected Metric",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 4235.8,
+            "y": 821.6
+          },
+          "nodeIndex": "2) Selected Unit",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 4634.1,
+            "y": 809.6
+          },
+          "nodeIndex": "3) Selected Target",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 5032.5,
+            "y": 785.6
+          },
+          "nodeIndex": "4) Selected Period",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2525.1,
+            "y": 0
+          },
+          "nodeIndex": "Brands",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1811.1,
+            "y": 519
+          },
+          "nodeIndex": "Budget Rate",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2243.9,
+            "y": 808.2
+          },
+          "nodeIndex": "Customers",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2066.1,
+            "y": 1272.6
+          },
+          "nodeIndex": "Date",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 5430.9,
+            "y": 797.6
+          },
+          "nodeIndex": "Employees",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2310,
+            "y": 1216.2
+          },
+          "nodeIndex": "Exchange Rate",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1681.8,
+            "y": 758.6
+          },
+          "nodeIndex": "Invoice Document Type",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 5829.2,
+            "y": 785.6
+          },
+          "nodeIndex": "Order Document Type",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 6227.6,
+            "y": 785.6
+          },
+          "nodeIndex": "Order Status",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2283.8,
+            "y": 464.4
+          },
+          "nodeIndex": "Products",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3040.7,
+            "y": 842.4
+          },
+          "nodeIndex": "Regions",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 6626,
+            "y": 821.6
+          },
+          "nodeIndex": "Z01CG1 - Quantity",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 7024.3,
+            "y": 821.6
+          },
+          "nodeIndex": "Z01CG2 - Value (Budget Rate)",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 7422.7,
+            "y": 821.6
+          },
+          "nodeIndex": "Z01CG4 - Lines",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 7821.1,
+            "y": 821.6
+          },
+          "nodeIndex": "Z02CG1 - Unit",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 8219.4,
+            "y": 821.6
+          },
+          "nodeIndex": "Z03CG1 - Sales Target",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 8617.8,
+            "y": 821.6
+          },
+          "nodeIndex": "Z03CG2 - Orders Target",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 9016.2,
+            "y": 821.6
+          },
+          "nodeIndex": "Z04CG1 - Time Intelligence",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 8922,
+            "y": 674.3
+          },
+          "nodeIndex": "zz_ReportObjects",
+          "nodeLineageTag": "798f027d-8c22-4f11-bcca-ce440e34f5c8",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {},
+          "nodeIndex": "___K201",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 1,
+      "scrollPosition": {
+        "x": 0,
+        "y": 131.09051471381505
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 682.47703871021827,
+            "y": 596.83702415252674
+          },
+          "nodeIndex": "Invoices",
+          "nodeLineageTag": "e864ea7c-38b6-44bc-92b6-e167034b7f19",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 985.38910709688071
+          },
+          "nodeIndex": "Date",
+          "nodeLineageTag": "0bb45e29-3908-422d-ade4-4100434bdfa4",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 974.31891797143112,
+            "y": 253.91230852451167
+          },
+          "nodeIndex": "Invoice Document Type",
+          "nodeLineageTag": "dbcc3ac6-9a34-4dc6-8477-078cb12b3dd4",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 320.31451678124108,
+            "y": 645.876180077596
+          },
+          "nodeIndex": "Products",
+          "nodeLineageTag": "4963b255-25ef-4ad6-8fc0-3991443146a0",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 375.99689316640439,
+            "y": 271.22719152385974
+          },
+          "nodeIndex": "Customers",
+          "nodeLineageTag": "c247ff24-c33b-4a9e-96f6-95d1e36e4be4",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 36.837465145275104,
+            "y": 151.42844687584184
+          },
+          "nodeIndex": "Regions",
+          "nodeLineageTag": "bca583de-764e-4d89-9f57-4f9b7afa671f",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 687.86339272885357,
+            "y": 1224.4613514645698
+          },
+          "nodeIndex": "Budget",
+          "nodeLineageTag": "a6b0eb60-264f-474d-a8fe-ac16f65fbc35",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 685.247017592075,
+            "y": 914.12841454941758
+          },
+          "nodeIndex": "Orders",
+          "nodeLineageTag": "85791d56-7571-4870-ac91-2e53ef43e591",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 576.88418670154158
+          },
+          "nodeIndex": "Brands",
+          "nodeLineageTag": "5e2b506f-5416-43b6-b5f6-160cbd60ab96",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 1343.5702283306837
+          },
+          "nodeIndex": "Exchange Rate",
+          "nodeLineageTag": "01ee8527-a2dc-471d-9a3d-9ccfe51284ef",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Layout 1",
+      "zoomValue": 50.346892102823169,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Layout 1",
+  "defaultDiagram": "All tables"
+}

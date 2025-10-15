@@ -1,0 +1,20 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "62e0e50a60b0575015eb",
+  "displayName": "Before & After",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "visualInteractions": [
+    {
+      "source": "56a6e64022ade084e0d2",
+      "target": "eb507cc8919d144a8815",
+      "type": "NoFilter"
+    },
+    {
+      "source": "eb507cc8919d144a8815",
+      "target": "56a6e64022ade084e0d2",
+      "type": "NoFilter"
+    }
+  ]
+}

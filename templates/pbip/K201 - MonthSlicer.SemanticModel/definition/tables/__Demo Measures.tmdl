@@ -1,0 +1,61 @@
+/// 5 measures usable without any selection; quick-start
+table '__Demo Measures'
+	lineageTag: 5bfcf671-969d-4907-942e-4ed897cbc246
+
+	measure Sales =
+			
+			CALCULATE (
+			    [Turnover],
+			    'Exchange Rate'[From Currency] = "EUR"
+			)
+		formatString: #,##0
+		lineageTag: 19ea0898-8a9e-43a6-8190-48879e67068e
+
+	measure 'Sales Budget' =
+			
+			CALCULATE (
+			    [Budget],
+			    'Exchange Rate'[From Currency] = "EUR"
+			)
+		formatString: #,##0
+		lineageTag: e3555966-4f07-443b-a732-838da8defcc2
+
+	measure 'Sales Forecast' =
+			
+			CALCULATE (
+			    [Forecast],
+			    'Exchange Rate'[From Currency] = "EUR"
+			)
+		formatString: #,##0
+		lineageTag: d4110b87-0cfc-49d6-8b96-053d05450b96
+
+	measure 'Billing Document Lines' =
+			
+			[Invoice Lines]
+		formatString: #,##0
+		lineageTag: d69dc0a4-9763-403e-8e38-edb03bb5ec7e
+
+	measure '# Accounts' =
+			
+			[# Customers]
+		formatString: #,##0
+		lineageTag: be41049e-f8e5-48dd-8d7f-9c14dd274b1a
+
+	column __Measures
+		isHidden
+		lineageTag: 7b86f793-f2d4-4efc-be96-092bd800e254
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [__Measures]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '__Demo Measures' = calculated
+		mode: import
+		source =
+				
+				SELECTCOLUMNS (
+				    { 1 },
+				    "__Measures", ''[Value]
+				)
+

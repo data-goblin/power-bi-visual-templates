@@ -1,0 +1,272 @@
+table 'On-Time Delivery'
+	lineageTag: fa6fb917-28ce-4d34-97ad-9fff4d086e1c
+
+	measure 'OTD % (Lines)' =
+			
+			VAR _OnTime = [OTD (Lines)]
+			VAR _Total = CALCULATE (
+			    [Invoice Lines],
+			    'Invoice Document Type'[Group] = "Invoice"
+			)
+			RETURN
+			
+			DIVIDE ( _OnTime, _Total )
+		formatString: #,##0.0%
+		displayFolder: 3. Lines
+		lineageTag: ac99485b-fc61-474e-a30e-d0889efce03f
+
+	measure 'OTD % (Quantity)' = ```
+			
+			VAR _OnTime = [OTD (Quantity)]
+			VAR _Total = 
+			    CALCULATE (
+			        [Total Net Invoice Quantity],
+			        'Invoice Document Type'[Group] = "Invoice"
+			    )
+			RETURN
+			
+			DIVIDE ( _OnTime, _Total )
+			```
+		formatString: #,##0.0%
+		displayFolder: 2. Quantity
+		lineageTag: 29fcb593-54b0-4061-ae46-2683f72fe75a
+
+	measure 'OTD % (Value)' = ```
+			
+			VAR _OnTime = [OTD (Value)]
+			VAR _Total = 
+			    CALCULATE (
+			        [Total Net Invoice Value],
+			        'Invoice Document Type'[Group] = "Invoice"
+			    )
+			RETURN
+			
+			DIVIDE ( _OnTime, _Total )
+			```
+		formatString: #,##0.0%
+		displayFolder: 1. Value
+		lineageTag: 8e11165d-306e-4e59-b549-fc1cdf4b080f
+
+	measure 'OTD (Lines)' =
+			
+			CALCULATE (
+			    [Invoice Lines],
+			    'On-Time Delivery'[OTD Indicator] = TRUE,
+			    'Invoice Document Type'[Group] = "Invoice"
+			)
+		formatString: #,##0
+		displayFolder: 3. Lines
+		lineageTag: e117a7f4-cf4b-4ec6-80bb-a1cc7970da51
+
+	measure 'OTD (Quantity)' =
+			
+			CALCULATE (
+			    [Total Net Invoice Quantity],
+			    'On-Time Delivery'[OTD Indicator] = TRUE,
+			    'Invoice Document Type'[Group] = "Invoice"
+			)
+		formatString: #,##0
+		displayFolder: 2. Quantity
+		lineageTag: 7018a9c2-01fc-4f2b-8312-80c684c99e25
+
+	/// Calculates the total net invoice value for on-time deliveries where the OTD Indicator is true and the invoice doc type is standard or express..
+	measure 'OTD (Value)' =
+			
+			CALCULATE (
+			    [Total Net Invoice Value],
+			    'On-Time Delivery'[OTD Indicator] = TRUE,
+			    'Invoice Document Type'[Group] = "Invoice"
+			)
+		formatString: #,##0
+		displayFolder: 1. Value
+		lineageTag: c6c32721-002f-444e-8c7a-dadc8ea6c9c6
+
+	/// SVG Bullet Chart (with Action Dots) of OTD % (Value) vs. OTD % (Value; PY), grouped by Key Account Name
+	measure 'New SVG Bullet Chart (with Action Dots) 1' = ```
+			
+			-- Use this inside of a Table or a Matrix visual.
+			-- The 'Image size' property of the Table or Matrix should be set to a 'Height' of 25px and a 'Width' of 100px
+			
+			
+			----------------------------------------------------------------------------------------
+			-------------------- START CONFIG - SAFELY CHANGE STUFF IN THIS AREA -------------------
+			----------------------------------------------------------------------------------------
+			
+			
+			-- Input field config
+			VAR _Actual = [OTD % (Value)]
+			VAR _Target = [OTD % (Value; PY)]
+			VAR _Performance = DIVIDE ( _Actual - _Target, _Target ) 
+			
+			
+			-- Sentiment config (percent)
+			VAR _VeryBad    = -0.075
+			VAR _Bad        = -0.025
+			VAR _Good       = 0.025
+			VAR _VeryGood   = 0.075
+			
+			
+			-- Chart Config
+			VAR _BarMax = 100
+			VAR _BarMin = 20
+			VAR _Scope = ALL ( 'Customers'[Key Account Name], 'Customers'[Account Name] )
+			
+			
+			-- Color config.
+			VAR _BackgroundColor = "#F5F5F5"                  -- Light grey
+			VAR _BarFillColor  = "#CFCFCF"                    -- Medium grey
+			VAR _BaselineColor = "#737373"                    -- Dark grey
+			VAR _TargetColor = "black"                        -- Black
+			
+			VAR _ActionDotFill = 
+			    SWITCH (
+			        TRUE(),
+			        _Performance < _VeryBad, "#c2255c",       -- Dark red
+			        _Performance < _Bad, "#e6c5da",           -- Light red
+			        _Performance > _Good, "#74B2FF",          -- Light blue
+			        _Performance > _VeryGood, "#2D6390",      -- Dark blue
+			        "#FFFFFF00"                               -- Transparent
+			    )
+			
+			
+			----------------------------------------------------------------------------------------
+			----------------------- END CONFIG - BEYOND HERE THERE BE DRAGONS ----------------------
+			----------------------------------------------------------------------------------------
+			
+			
+			    -- Get axis maximum
+			    VAR _MaxActualsInScope = 
+			        CALCULATE(
+			            MAXX(
+			                _Scope,
+			                [OTD % (Value)]
+			            ),
+			            REMOVEFILTERS( 'Customers'[Key Account Name] )
+			        )
+			    
+			    VAR _MaxTargetInScope = 
+			        CALCULATE(
+			            MAXX(
+			                _Scope,
+			                [OTD % (Value; PY)]
+			            ),
+			            REMOVEFILTERS( 'Customers'[Key Account Name] )
+			        )
+			    
+			    VAR _AxisMax = 
+			        IF (
+			            HASONEVALUE ( 'Customers'[Key Account Name] ),
+			            MAX( _MaxActualsInScope, _MaxTargetInScope ),
+			            CALCULATE( MAX( [OTD % (Value)], [OTD % (Value; PY)] ), REMOVEFILTERS( 'Customers'[Key Account Name] ) )
+			        ) * 1.1
+			    
+			    VAR _AxisRange = 
+			        _BarMax - _BarMin
+			
+			    -- Normalize values (to get position along X-axis)
+			    VAR _ActualNormalized = ( DIVIDE ( _Actual, _AxisMax ) * _AxisRange )
+			    VAR _TargetNormalized = ( DIVIDE ( _Target, _AxisMax ) * _AxisRange ) + _BarMin - 1
+			
+			
+			-- Vectors and SVG code
+			VAR _SvgPrefix = "data:image/svg+xml;utf8, <svg xmlns='http://www.w3.org/2000/svg'>"
+			
+			VAR _Sort = "<desc>" & FORMAT ( _Actual, "000000000000" ) & "</desc>"
+			
+			VAR _ActionDot  = "<circle cx='10' cy='11' r='5' fill='" & _ActionDotFill &"'/>"
+			
+			VAR _BarBaseline = "<rect x='" & _BarMin & "' y='4' width='1' height='60%' fill='" & _BaselineColor & "'/>"
+			VAR _BarBackground = "<rect x='" & _BarMin & "' y='2' width='" & _BarMax & "' height='80%' fill='" & _BackgroundColor & "'/>"
+			VAR _ActualBar  = "<rect x='" & _BarMin & "' y='5' width='" & _ActualNormalized & "' height='50%' fill='" & _BarFillColor & "'/>"
+			VAR _TargetLine = "<rect x='" & _TargetNormalized & "' y='2' width='2' height='80%' fill='" & _TargetColor & "'/>"
+			
+			VAR _SvgSuffix = "</svg>"
+			
+			
+			-- Final result
+			VAR _SVG =
+			    _SvgPrefix 
+			
+			    & _Sort
+			
+			    & _ActionDot
+			
+			    & _BarBackground
+			    & _ActualBar
+			    & _BarBaseline
+			    & _TargetLine
+			
+			    & _SvgSuffix
+			
+			RETURN
+			    _SVG
+			
+			```
+		isHidden
+		displayFolder: SVGs\Bullet Chart
+		lineageTag: 43450c77-81d6-4f85-b573-339edc876ee0
+		dataCategory: ImageUrl
+
+	measure 'OTD % (Value; PY)' =
+			CALCULATE (
+			    [OTD % (Value)],
+			    DATEADD ( 'Date'[Date], -1, YEAR )
+			)
+		displayFolder: 1. Value
+		lineageTag: be13f493-a174-47e7-ac0b-bd20d8fcc3e8
+
+	column 'OTD Indicator'
+		isHidden
+		displayFolder: Columns\2. Keys
+		lineageTag: 705b4fb2-c9bb-4915-8cb4-b7dac943d875
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Invoices[OTD Indicator]
+		sortByColumn: 'OTD Sort Order'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OTD Status'
+		isHidden
+		displayFolder: Columns\1. OTD
+		lineageTag: 7f04b315-56ac-43ca-ad33-ff6229fe4e8c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [OTD Status]
+		sortByColumn: 'OTD Sort Order'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OTD Sort Order'
+		isHidden
+		displayFolder: Columns\3. Ordinal
+		lineageTag: 7a38eab2-031b-4605-9352-d562e2c842c7
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [OTD Sort Order]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'On-Time Delivery' = calculated
+		mode: import
+		source =
+				
+				ADDCOLUMNS (
+				    FILTER (
+				        DISTINCT ('Invoices'[OTD Indicator]),
+				        NOT ISBLANK ('Invoices'[OTD Indicator])
+				    ),
+				    "OTD Status",
+				        SWITCH (
+				            TRUE (),
+				            'Invoices'[OTD Indicator] = TRUE, "On Time",
+				            "Late"
+				        ),
+				    "OTD Sort Order",
+				        SWITCH (
+				            TRUE (),
+				            'Invoices'[OTD Indicator] = TRUE, 1,
+				            2
+				        )
+				)
+

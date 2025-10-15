@@ -1,0 +1,19 @@
+role 'Station Sales Managers'
+	modelPermission: read
+
+	tablePermission Regions =
+			
+			VAR _CurrentUser =
+			    SELECTCOLUMNS (
+			        FILTER (
+			            'Employees',
+			            'Employees'[Employee Email]
+			                = USERPRINCIPALNAME ( )
+			        ),
+			        "@Name", 'Employees'[Employee Name]
+			    )
+			RETURN
+			    'Regions'[Station Sales Managers] IN _CurrentUser
+
+	annotation PBI_Id = fa0b2f174d25400296ad332b392a1c57
+

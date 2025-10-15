@@ -1,0 +1,8 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "f1bf8244c8632606ac7d",
+  "displayName": "Step 3",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280
+}

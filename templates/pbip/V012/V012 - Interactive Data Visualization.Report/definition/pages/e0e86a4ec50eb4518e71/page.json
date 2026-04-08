@@ -1,0 +1,35 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "e0e86a4ec50eb4518e71",
+  "displayName": "TT",
+  "displayOption": "ActualSize",
+  "height": 125,
+  "width": 320,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "9d086cb84ac24347eacb",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Customer"
+              }
+            },
+            "Property": "Customer Sold-To Name"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User",
+        "objects": {
+          "general": [
+            {
+              "properties": {}
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "type": "Tooltip"
+}

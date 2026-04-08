@@ -1,0 +1,54 @@
+table MetricSelector
+	isHidden
+	lineageTag: ms000001-0001-0001-0001-000000000001
+
+	column MetricSelector
+		isHidden
+		lineageTag: ms000001-0001-0001-0001-000000000002
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'MetricSelector Order'
+
+		relatedColumnDetails
+			groupByColumn: 'MetricSelector Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MetricSelector Fields'
+		isHidden
+		lineageTag: ms000001-0001-0001-0001-000000000003
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'MetricSelector Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MetricSelector Order'
+		isHidden
+		formatString: 0
+		lineageTag: ms000001-0001-0001-0001-000000000004
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MetricSelector = calculated
+		mode: import
+		source =
+				{
+				    ("COGS", NAMEOF('Shipments'[COGS]), 0),
+				    ("Gross Margin %", NAMEOF('Shipments'[Gross Margin %]), 1),
+				    ("Gross Profit", NAMEOF('Shipments'[Gross Profit]), 2),
+				    ("Invoice Lines", NAMEOF('Shipments'[# Invoice Lines]), 3),
+				    ("Revenue", NAMEOF('Shipments'[Revenue]), 4),
+				    ("Units", NAMEOF('Shipments'[# Units Sold]), 5)
+				}
+
+	annotation ParameterMetadata = {"version":3,"kind":2}
+

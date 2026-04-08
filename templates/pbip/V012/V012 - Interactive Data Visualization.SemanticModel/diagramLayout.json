@@ -1,0 +1,201 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 10.887012402500542,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 384,
+            "y": 0
+          },
+          "nodeIndex": "Brand",
+          "nodeLineageTag": "5e2b506f-5416-43b6-b5f6-160cbd60ab96",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 1068,
+            "y": 400
+          },
+          "nodeIndex": "Budget Rate",
+          "nodeLineageTag": "68dde8df-0ca5-4974-9afa-a3d1fc7dcf1f",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 784,
+            "y": 0
+          },
+          "nodeIndex": "Customer",
+          "nodeLineageTag": "c247ff24-c33b-4a9e-96f6-95d1e36e4be4",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 284,
+            "y": 400
+          },
+          "nodeIndex": "Date",
+          "nodeLineageTag": "0bb45e29-3908-422d-ade4-4100434bdfa4",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 400
+          },
+          "nodeIndex": "Exchange Rate",
+          "nodeLineageTag": "01ee8527-a2dc-471d-9a3d-9ccfe51284ef",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 1118,
+            "y": 0
+          },
+          "nodeIndex": "Invoice Document Type",
+          "nodeLineageTag": "dbcc3ac6-9a34-4dc6-8477-078cb12b3dd4",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 534,
+            "y": 400
+          },
+          "nodeIndex": "Product",
+          "nodeLineageTag": "4963b255-25ef-4ad6-8fc0-3991443146a0",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 784,
+            "y": 400
+          },
+          "nodeIndex": "Region",
+          "nodeLineageTag": "bca583de-764e-4d89-9f57-4f9b7afa671f",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 800,
+            "y": 800
+          },
+          "nodeIndex": "Shipments",
+          "nodeLineageTag": "e864ea7c-38b6-44bc-92b6-e167034b7f19",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 300,
+            "y": 800
+          },
+          "nodeIndex": "Procurement",
+          "nodeLineageTag": "071fc53f-ba4e-46dc-83af-e9be9d6b3101",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 0
+          },
+          "nodeIndex": "Supplier",
+          "nodeLineageTag": "a767ad51-10f6-4224-a98a-319f307bcc58",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1970,
+            "y": 474
+          },
+          "nodeIndex": "MetricSelector",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1402,
+            "y": 474
+          },
+          "nodeIndex": "ScatterChartXMetricSelector",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1686,
+            "y": 474
+          },
+          "nodeIndex": "ScatterChartYMetricSelector",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 44.905697313103978,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

@@ -1,0 +1,54 @@
+table ScatterChartYMetricSelector
+	isHidden
+	lineageTag: 3973442a-7795-4ef7-9e65-0b50ef1a9168
+
+	column ScatterChartYAxis
+		isHidden
+		lineageTag: 290c0aef-fed1-42c8-bbc5-5c2f2cdd0437
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'ScatterChartYAxis Order'
+
+		relatedColumnDetails
+			groupByColumn: 'ScatterChartYAxis Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ScatterChartYAxis Fields'
+		isHidden
+		lineageTag: cfaad4c8-bb0b-4367-949a-deaaf373c287
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'ScatterChartYAxis Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ScatterChartYAxis Order'
+		isHidden
+		formatString: 0
+		lineageTag: c98a6284-e80e-4e99-b3bb-953b69a381b4
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ScatterChartYMetricSelector = calculated
+		mode: import
+		source =
+				{
+				    ("COGS", NAMEOF('Shipments'[COGS]), 0),
+				    ("Gross Margin %", NAMEOF('Shipments'[Gross Margin %]), 1),
+				    ("Gross Profit", NAMEOF('Shipments'[Gross Profit]), 2),
+				    ("Invoice Lines", NAMEOF('Shipments'[# Invoice Lines]), 3),
+				    ("Revenue", NAMEOF('Shipments'[Revenue]), 4),
+				    ("Units", NAMEOF('Shipments'[# Units Sold]), 5)
+				}
+
+	annotation PBI_Id = 893d8f661e114c69be8f99dec539577f
+

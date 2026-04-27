@@ -1,0 +1,49 @@
+table 'Top 10 Products + Other'
+	lineageTag: 278231bc-ce8d-4d80-8b04-eba9a0d0812c
+
+	column 'Display Name'
+		lineageTag: 2f165066-4a22-417a-96d8-0499311c89e6
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Display Name]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Revenue
+		lineageTag: 77b70658-60b3-44d2-8667-a9f681d1852f
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Revenue]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Top 10 Products + Other' = calculated
+		mode: import
+		source =
+				
+				VAR _Ranked =
+				    ADDCOLUMNS(
+				        VALUES('Product'[Product Name]),
+				        "@Rev", CALCULATE([Revenue])
+				    )
+				VAR _WithRank =
+				    ADDCOLUMNS(_Ranked, "@Rank", RANKX(_Ranked, [@Rev], ,
+				DESC))
+				VAR _Top10 =
+				    SELECTCOLUMNS(
+				        FILTER(_WithRank, [@Rank] <= 10),
+				        "Display Name", [Product Name],
+				        "Revenue", [@Rev]
+				    )
+				VAR _Other =
+				    ROW(
+				        "Display Name", "Other",
+				        "Revenue", SUMX(FILTER(_WithRank, [@Rank] > 10),
+				[@Rev])
+				    )
+				RETURN UNION(_Top10, _Other)
+
+	annotation PBI_Id = 744b7384c0444507af7f1502f0aa9d5e
+

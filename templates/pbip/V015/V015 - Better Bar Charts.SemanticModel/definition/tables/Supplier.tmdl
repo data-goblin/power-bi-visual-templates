@@ -1,0 +1,59 @@
+table Supplier
+	lineageTag: a767ad51-10f6-4224-a98a-319f307bcc58
+
+	column 'Supplier Key'
+		dataType: int64
+		isHidden
+		formatString: 0
+		displayFolder: 3. Keys
+		lineageTag: 9a68f007-1918-4e08-a08b-173ab1a8d96b
+		summarizeBy: none
+		sourceColumn: Supplier Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Supplier Name'
+		dataType: string
+		displayFolder: 1. Supplier Hierarchy
+		lineageTag: 4655104c-c851-40ee-84d5-e8d3a8e3756d
+		summarizeBy: none
+		sourceColumn: Supplier Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Supplier Group'
+		dataType: string
+		displayFolder: 1. Supplier Hierarchy
+		lineageTag: ea3932bd-8126-48d3-8fce-f1faf5ca1c04
+		summarizeBy: none
+		sourceColumn: Supplier Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Supply Category'
+		dataType: string
+		displayFolder: 2. Attributes
+		lineageTag: 07228208-6dc0-42bb-a821-99f620350248
+		summarizeBy: none
+		sourceColumn: Supply Category
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Supplier = m
+		mode: import
+		queryGroup: Tables
+		source =
+				let
+				    Source = Csv.Document(File.Contents(#"DataFolder" & "\Supplier.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {
+				        {"Supplier Key", Int64.Type}, {"Supplier Name", type text},
+				        {"Supplier Group", type text}, {"Supply Category", type text}
+				    })
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

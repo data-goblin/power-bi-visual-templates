@@ -1,0 +1,12 @@
+table 'Product Names'
+	lineageTag: 6e78ce7c-ede9-4c98-a202-42e245ab710d
+
+	column 'Product Name'
+		lineageTag: 0cd8d0f6-6637-49f6-a5f8-ae85caebf306
+		isNameInferred
+		sourceColumn: Product[Product Name]
+
+	partition 'Product Names' = calculated
+		mode: import
+		source = UNION(ALLNOBLANKROW('Product'[Product Name]), {"Others"})
+

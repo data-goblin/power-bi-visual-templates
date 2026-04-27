@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "V015 - Better Bar Charts"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "3b99b7c4-c00f-458b-b3c9-1ff2bb5f9d27"
+  }
+}

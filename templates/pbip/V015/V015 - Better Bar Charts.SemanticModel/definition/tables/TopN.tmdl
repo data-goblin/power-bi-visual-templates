@@ -1,0 +1,17 @@
+table TopN
+	lineageTag: 9eea0501-1a7b-450d-9c8e-f04f81b7012e
+
+	measure 'TopN Value' = SELECTEDVALUE ( 'TopN'[TopN] )
+		formatString: 0
+		lineageTag: 94e6536e-b01d-4b03-a3ea-ff9a92e0d79b
+
+	column TopN
+		dataType: int64
+		lineageTag: d3fabf9d-45b5-4009-8203-b97eaa37480e
+		summarizeBy: none
+		sourceColumn: [Value]
+
+	partition TopN = calculated
+		mode: import
+		source = GENERATESERIES(1, 20, 1)
+

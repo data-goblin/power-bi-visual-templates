@@ -1,0 +1,192 @@
+table Procurement
+	lineageTag: 071fc53f-ba4e-46dc-83af-e9be9d6b3101
+
+	/// Total purchase value in EUR, converted via Budget Rate.
+	measure 'Purchase Value Total' = SUMX(Procurement, Procurement[Purchase Value] / RELATED('Budget Rate'[Rate]))
+		displayFolder: Measures
+		lineageTag: 259400b3-29ec-4183-b60f-91c0bb972c91
+
+		formatStringDefinition =
+				VAR _Value = SELECTEDMEASURE()
+				VAR _FormatString =
+				    DaxLib.FormatString.DynamicUnits (
+				        _Value,
+				        "",
+				        "",
+				        "€",
+				        ""
+				    )
+				RETURN _FormatString
+
+	/// Total quantity of items purchased.
+	measure 'Purchase Quantity Total' = SUM(Procurement[Purchase Quantity])
+		formatString: #,##0
+		displayFolder: Measures
+		lineageTag: 0e2bce9c-9e03-40d2-8257-ce05e1fd6aee
+
+	/// Total landed cost in EUR (purchase value plus inbound freight), converted via Budget Rate.
+	measure 'Landed Cost' = SUMX(Procurement, (Procurement[Purchase Value] + Procurement[Inbound Freight]) / RELATED('Budget Rate'[Rate]))
+		displayFolder: Measures
+		lineageTag: cc880652-d453-4078-bf2a-6e6931160297
+
+		formatStringDefinition =
+				VAR _Value = SELECTEDMEASURE()
+				VAR _FormatString =
+				    DaxLib.FormatString.DynamicUnits (
+				        _Value,
+				        "",
+				        "",
+				        "€",
+				        ""
+				    )
+				RETURN _FormatString
+
+	/// Count of distinct purchase orders.
+	measure '# Purchase Orders' = DISTINCTCOUNT(Procurement[Purchase Order Number])
+		formatString: #,##0
+		displayFolder: Measures
+		lineageTag: 0d43a287-1898-43f8-a3a9-49e9cb441f9f
+
+	column 'Purchase Order Number'
+		dataType: string
+		isHidden
+		displayFolder: Columns\2. Document
+		lineageTag: b58eedf2-5204-46ff-89f3-515ca9e3bffc
+		summarizeBy: none
+		sourceColumn: Purchase Order Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Purchase Order Line Item'
+		dataType: int64
+		isHidden
+		formatString: 0
+		displayFolder: Columns\2. Document
+		lineageTag: 68b55631-0604-4881-87cf-cee6261d3cc6
+		summarizeBy: none
+		sourceColumn: Purchase Order Line Item
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Purchase Date'
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		sourceProviderType: date
+		displayFolder: Columns\1. Keys
+		lineageTag: 8eb2d0ed-4f46-488f-967b-eaf0234f7ed3
+		summarizeBy: none
+		sourceColumn: Purchase Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Supplier Key'
+		dataType: int64
+		isHidden
+		formatString: 0
+		displayFolder: Columns\1. Keys
+		lineageTag: 2c847cab-58c2-4cbc-aaaf-830f0d890706
+		summarizeBy: none
+		sourceColumn: Supplier Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Key'
+		dataType: int64
+		isHidden
+		formatString: 0
+		displayFolder: Columns\1. Keys
+		lineageTag: dc1b7491-9eca-4d0e-aa1f-29bc32cdc587
+		summarizeBy: none
+		sourceColumn: Product Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Receiving Settlement'
+		dataType: string
+		isHidden
+		displayFolder: Columns\1. Keys
+		lineageTag: b225d72d-2343-4065-89d9-868caf35971b
+		summarizeBy: none
+		sourceColumn: Receiving Settlement
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Local Currency'
+		dataType: string
+		isHidden
+		displayFolder: Columns\1. Keys
+		lineageTag: 58b01ee4-f68b-4b41-a5ad-1ce7d282a285
+		summarizeBy: none
+		sourceColumn: Local Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Purchase Value'
+		dataType: double
+		isHidden
+		formatString: #,##0
+		displayFolder: Columns\0. Facts
+		lineageTag: 149392a0-f068-4999-81a5-bdc95d66408e
+		summarizeBy: sum
+		sourceColumn: Purchase Value
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Purchase Quantity'
+		dataType: int64
+		isHidden
+		displayFolder: Columns\0. Facts
+		lineageTag: da8f3ce2-5b53-4ea1-bdff-d6ebb595e2e4
+		summarizeBy: sum
+		sourceColumn: Purchase Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Purchase Weight'
+		dataType: double
+		isHidden
+		formatString: #,##0
+		displayFolder: Columns\0. Facts
+		lineageTag: 9c19a62e-9582-4fa8-9fab-e789496b180f
+		summarizeBy: sum
+		sourceColumn: Purchase Weight
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Inbound Freight'
+		dataType: double
+		isHidden
+		formatString: #,##0
+		displayFolder: Columns\0. Facts
+		lineageTag: 3f307235-8022-4c99-9768-612a35ef814b
+		summarizeBy: sum
+		sourceColumn: Inbound Freight
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Procurement = m
+		mode: import
+		queryGroup: Tables
+		source =
+				let
+				    Source = Csv.Document(File.Contents(#"DataFolder" & "\Procurement.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {
+				        {"Purchase Order Number", type text}, {"Purchase Order Line Item", Int64.Type},
+				        {"Purchase Date", type date}, {"Supplier Key", Int64.Type}, {"Product Key", Int64.Type},
+				        {"Receiving Settlement", type text}, {"Local Currency", type text},
+				        {"Purchase Value", type number}, {"Purchase Quantity", Int64.Type},
+				        {"Purchase Weight", type number}, {"Inbound Freight", type number}
+				    }),
+				    #"Filtered Rows" = Table.SelectRows(#"Changed Type", each [Purchase Date] >= Date.From(#"RangeStart") and [Purchase Date] < Date.From(#"RangeEnd")),
+				    #"Excluded Svalbard" = Table.SelectRows(#"Filtered Rows", each [Receiving Settlement] <> "Svalbard Spur")
+				in
+				    #"Excluded Svalbard"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

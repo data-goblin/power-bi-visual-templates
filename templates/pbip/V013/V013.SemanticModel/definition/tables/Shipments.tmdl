@@ -1,0 +1,467 @@
+table Shipments
+	lineageTag: e864ea7c-38b6-44bc-92b6-e167034b7f19
+
+	/// Count of invoice line items.
+	measure '# Invoice Lines' = COUNTROWS ( Shipments )
+		formatString: #,##0
+		displayFolder: Measures
+		lineageTag: 0fab4eac-d56c-45a6-a5c8-8c3ceb38ba83
+
+	/// Gross Profit in EUR (Revenue minus COGS), converted via Budget Rate.
+	measure 'Gross Profit' =
+			SUMX (
+			    Shipments,
+			    ( Shipments[Net Invoice Value] - Shipments[Net Invoice COGS] )
+			        / RELATED ( 'Budget Rate'[Rate] )
+			)
+		displayFolder: Measures
+		lineageTag: f1000001-0001-0001-0001-000000000001
+
+		formatStringDefinition =
+				VAR _Value = SELECTEDMEASURE()
+				VAR _FormatString =
+				    DaxLib.FormatString.DynamicUnits (
+				        _Value,
+				        "",
+				        "",
+				        "€",
+				        ""
+				    )
+				RETURN _FormatString
+
+	/// Gross Margin as a percentage of Revenue.
+	measure 'Gross Margin %' = DIVIDE ( [Gross Profit], [Revenue] )
+		formatString: #,##0.0%;-#,##0.0%;#,##0.0%
+		displayFolder: Measures
+		lineageTag: f1000001-0001-0001-0001-000000000002
+
+	/// Total Revenue in EUR (Net Invoice Value converted via Budget Rate).
+	measure Revenue =
+			SUMX (
+			    Shipments,
+			    Shipments[Net Invoice Value]
+			        / RELATED ( 'Budget Rate'[Rate] )
+			)
+		displayFolder: Measures
+		lineageTag: f1000001-0001-0001-0001-000000000003
+
+		formatStringDefinition =
+				VAR _Value = SELECTEDMEASURE()
+				VAR _FormatString =
+				    DaxLib.FormatString.DynamicUnits (
+				        _Value,
+				        "",
+				        "",
+				        "€",
+				        ""
+				    )
+				RETURN _FormatString
+
+	/// Total Cost of Goods Sold in EUR.
+	measure COGS =
+			SUMX (
+			    Shipments,
+			    Shipments[Net Invoice COGS]
+			        / RELATED ( 'Budget Rate'[Rate] )
+			)
+		displayFolder: Measures
+		lineageTag: f1000001-0001-0001-0001-000000000004
+
+		formatStringDefinition =
+				VAR _Value = SELECTEDMEASURE()
+				VAR _FormatString =
+				    DaxLib.FormatString.DynamicUnits (
+				        _Value,
+				        "",
+				        "",
+				        "€",
+				        ""
+				    )
+				RETURN _FormatString
+
+	/// Gross Profit from the same period one year prior, used for year-over-year comparisons.
+	measure 'Gross Profit (PY)' =
+			CALCULATE (
+			    [Gross Profit],
+			    DATEADD ( 'Date'[Date], -1, YEAR ),
+			    REMOVEFILTERS ( 'Date'[IsThisYear], 'Date'[IsDateInScope] )
+			)
+		displayFolder: Measures
+		lineageTag: fc9b595f-fea8-423f-afff-abece8b80299
+
+		formatStringDefinition =
+				VAR _Value = SELECTEDMEASURE()
+				VAR _FormatString =
+				    DaxLib.FormatString.DynamicUnits (
+				        _Value,
+				        "",
+				        "",
+				        "€",
+				        ""
+				    )
+				RETURN _FormatString
+
+	/// Year-over-year change in Gross Profit expressed as a percentage.
+	measure 'Gross Profit YoY %' = DIVIDE ( [Gross Profit] - [Gross Profit (PY)], [Gross Profit (PY)] )
+		formatString: ↑#,##0.0%;↓#,##0.0%;#,##0.0%
+		displayFolder: Measures
+		lineageTag: fc9b595f-fea8-423f-afff-abece8b80301
+
+	/// Gross Margin % from the same period one year prior, used for year-over-year comparisons.
+	measure 'Gross Margin % (PY)' =
+			CALCULATE (
+			    [Gross Margin %],
+			    DATEADD ( 'Date'[Date], -1, YEAR ),
+			    REMOVEFILTERS ( 'Date'[IsThisYear], 'Date'[IsDateInScope] )
+			)
+		formatString: #,##0.0%;-#,##0.0%;#,##0.0%
+		displayFolder: Measures
+		lineageTag: fc9b595f-fea8-423f-afff-abece8b80302
+
+	/// Total shipped units (Net Invoice Quantity).
+	measure '# Units Sold' = SUM ( Shipments[Net Invoice Quantity] )
+		displayFolder: Measures
+		lineageTag: f1000001-0001-0001-0001-000000000010
+
+		formatStringDefinition =
+				VAR _Value = SELECTEDMEASURE()
+				VAR _FormatString =
+				    DaxLib.FormatString.DynamicUnits (
+				        _Value,
+				        "",
+				        "",
+				        "",
+				        ""
+				    )
+				RETURN _FormatString
+
+	/// Year-over-year change in Gross Margin % expressed in percentage points.
+	measure 'Gross Margin % YoY' = [Gross Margin %] - [Gross Margin % (PY)]
+		formatString: ↑#,##0.0%;↓#,##0.0%;#,##0.0%
+		displayFolder: Measures
+		lineageTag: b7ceff5b-356a-4f7d-9f7a-e05c1a2b6410
+
+	/// Year-over-year change in Revenue (current period minus prior year).
+	measure 'Revenue YoY' = [Revenue] - [Revenue (PY)]
+		displayFolder: Measures
+		lineageTag: d16fdaaf-311b-46ce-9620-9bf01010cb51
+
+		formatStringDefinition =
+				VAR _Value = SELECTEDMEASURE()
+				VAR _FormatString =
+				    DaxLib.FormatString.DynamicUnits (
+				        _Value,
+				        "",
+				        "",
+				        "€",
+				        ""
+				    )
+				RETURN
+				    "↑" & _FormatString & ";↓" & _FormatString & ";" & _FormatString
+
+	/// Revenue from the same period one year prior, used for year-over-year comparisons.
+	measure 'Revenue (PY)' =
+			CALCULATE (
+			    [Revenue],
+			    DATEADD ( 'Date'[Date], -1, YEAR ),
+			    REMOVEFILTERS ( 'Date'[IsThisYear], 'Date'[IsDateInScope] )
+			)
+		displayFolder: Measures
+		lineageTag: 8d0781f5-10cb-4a02-82b5-feebfc41c046
+
+		formatStringDefinition =
+				VAR _Value = SELECTEDMEASURE()
+				VAR _FormatString =
+				    DaxLib.FormatString.DynamicUnits (
+				        _Value,
+				        "",
+				        "",
+				        "€",
+				        ""
+				    )
+				RETURN _FormatString
+
+	/// Year-over-year change in COGS (current period minus prior year).
+	measure 'COGS YoY' = [COGS] - [COGS (PY)]
+		displayFolder: Measures
+		lineageTag: e8d175ac-745e-4af0-b577-63086623c683
+
+		formatStringDefinition =
+				VAR _Value = SELECTEDMEASURE()
+				VAR _FormatString =
+				    DaxLib.FormatString.DynamicUnits (
+				        _Value,
+				        "",
+				        "",
+				        "€",
+				        ""
+				    )
+				RETURN
+				    "↑" & _FormatString & ";↓" & _FormatString & ";" & _FormatString
+
+	/// COGS from the same period one year prior, used for year-over-year comparisons.
+	measure 'COGS (PY)' =
+			CALCULATE (
+			    [COGS],
+			    DATEADD ( 'Date'[Date], -1, YEAR ),
+			    REMOVEFILTERS ( 'Date'[IsThisYear], 'Date'[IsDateInScope] )
+			)
+		displayFolder: Measures
+		lineageTag: e15946c8-2c6e-47f2-ba9d-dfaac2e64d8b
+
+		formatStringDefinition =
+				VAR _Value = SELECTEDMEASURE()
+				VAR _FormatString =
+				    DaxLib.FormatString.DynamicUnits (
+				        _Value,
+				        "",
+				        "",
+				        "€",
+				        ""
+				    )
+				RETURN _FormatString
+
+	/// Year-over-year change in Gross Profit (current period minus prior year).
+	measure 'Gross Profit YoY' = [Gross Profit] - [Gross Profit (PY)]
+		displayFolder: Measures
+		lineageTag: ababca69-61d2-4ceb-8239-3e70411266c5
+
+		formatStringDefinition =
+				VAR _Value = SELECTEDMEASURE()
+				VAR _FormatString =
+				    DaxLib.FormatString.DynamicUnits (
+				        _Value,
+				        "",
+				        "",
+				        "€",
+				        ""
+				    )
+				RETURN
+				    "↑" & _FormatString & ";↓" & _FormatString & ";" & _FormatString
+
+	/// Year-over-year change in Revenue expressed as a percentage.
+	measure 'Revenue YoY %' = DIVIDE( [Revenue YoY], [Revenue (PY)] )
+		formatString: ↑#,##0.0%;↓#,##0.0%;#,##0.0%
+		displayFolder: Measures
+		lineageTag: dfd55801-a17b-42bf-959a-7308d777ff8c
+
+	/// Year-over-year change in COGS expressed as a percentage.
+	measure 'COGS YoY %' = DIVIDE ( [COGS] - [COGS (PY)], [COGS (PY)] )
+		formatString: ↑#,##0.0%;↓#,##0.0%;#,##0.0%
+		displayFolder: Measures
+		lineageTag: ee66dfef-47bd-40c8-9b0c-6be915c9afd4
+
+	column 'Billing Document Number'
+		dataType: string
+		isHidden
+		displayFolder: Columns\1. Degenerate Dimensions\Document #s
+		lineageTag: 80891c7d-b84a-4f81-b676-701a8560036e
+		summarizeBy: none
+		sourceColumn: Billing Document Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billing Date'
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd
+		sourceProviderType: date
+		displayFolder: Columns\2. Keys\Dates
+		lineageTag: 3ecdddab-f189-4960-9608-28147ac9655e
+		summarizeBy: none
+		sourceColumn: Billing Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column 'Customer Key'
+		dataType: int64
+		isHidden
+		formatString: 0
+		displayFolder: Columns\2. Keys
+		lineageTag: 00383e87-df2b-496c-8fa2-6c332eaa6e07
+		summarizeBy: none
+		sourceColumn: Customer Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billing Document Line Item Number'
+		dataType: int64
+		isHidden
+		formatString: 0
+		displayFolder: Columns\1. Degenerate Dimensions\Document #s
+		lineageTag: 2d7bb6a5-1f60-464f-8c26-275762c63277
+		summarizeBy: sum
+		sourceColumn: Billing Document Line Item Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Key'
+		dataType: int64
+		isHidden
+		displayFolder: Columns\2. Keys
+		lineageTag: 2206902c-3b4b-4b19-bc0f-a4d1b133f937
+		summarizeBy: none
+		sourceColumn: Product Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ship Date'
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		sourceProviderType: date
+		displayFolder: Columns\2. Keys\Dates
+		lineageTag: 26b8ed72-1ee8-4732-b37e-89fbcded5bc1
+		summarizeBy: none
+		sourceColumn: Ship Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'OTD Indicator'
+		dataType: string
+		isHidden
+		displayFolder: Columns\2. Keys
+		lineageTag: 61c6d81f-1fb6-420d-a6bf-aaaff17aedcb
+		summarizeBy: none
+		sourceColumn: OTD Indicator
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billing Document Type Code'
+		dataType: string
+		isHidden
+		displayFolder: Columns\2. Keys
+		lineageTag: f08cfa92-9f3b-4abe-8925-00d00d77d15a
+		summarizeBy: none
+		sourceColumn: Billing Document Type Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Local Currency'
+		dataType: string
+		isHidden
+		displayFolder: Columns\2. Keys
+		lineageTag: b00f4fb9-8ed5-4972-b62a-352eac69d319
+		summarizeBy: none
+		sourceColumn: Local Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Delivery Cost'
+		dataType: double
+		isHidden
+		formatString: #,##0
+		displayFolder: Columns\0. Facts
+		lineageTag: 2cab7bca-6b96-40ec-8270-84d9dd874335
+		summarizeBy: sum
+		sourceColumn: Delivery Cost
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Net Invoice COGS'
+		dataType: double
+		isHidden
+		formatString: #,##0
+		displayFolder: Columns\0. Facts
+		lineageTag: 8ac8f0a8-e780-4d46-aaba-a4b806711a51
+		summarizeBy: sum
+		sourceColumn: Net Invoice COGS
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Late Delivery Penalties'
+		dataType: double
+		isHidden
+		formatString: #,##0
+		displayFolder: Columns\0. Facts
+		lineageTag: 63f35167-689e-4bfd-a6d4-d3e6c7b7d6ab
+		summarizeBy: sum
+		sourceColumn: Late Delivery Penalties
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Overdue Payment Penalties'
+		dataType: double
+		isHidden
+		formatString: #,##0
+		displayFolder: Columns\0. Facts
+		lineageTag: d220b6b9-526e-48f9-bb37-ad55b4911012
+		summarizeBy: sum
+		sourceColumn: Overdue Payment Penalties
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Taxes & Commercial Fees'
+		dataType: double
+		isHidden
+		formatString: #,##0
+		displayFolder: Columns\0. Facts
+		lineageTag: 87bf78e5-838d-4135-8088-d1ab84900b17
+		summarizeBy: sum
+		sourceColumn: Taxes & Commercial Fees
+
+		annotation SummarizationSetBy = Automatic
+
+	column Freight
+		dataType: double
+		isHidden
+		formatString: #,##0
+		displayFolder: Columns\0. Facts
+		lineageTag: 86a9f2ce-a05f-4470-9c36-a55196785919
+		summarizeBy: sum
+		sourceColumn: Freight
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Net Invoice Value'
+		dataType: double
+		isHidden
+		formatString: #,##0
+		displayFolder: Columns\0. Facts
+		lineageTag: 86af53e2-7af5-497b-b995-9d43aebbc686
+		summarizeBy: sum
+		sourceColumn: Net Invoice Value
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Net Invoice Quantity'
+		dataType: int64
+		isHidden
+		displayFolder: Columns\0. Facts
+		lineageTag: 5b447336-164e-415f-9d13-759cfa0aa0b5
+		summarizeBy: sum
+		sourceColumn: Net Invoice Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Shipments = m
+		mode: import
+		queryGroup: Tables
+		source =
+				let
+				    Source = Csv.Document(File.Contents(#"DataFolder" & "\Shipments.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {
+				        {"Billing Document Number", type text}, {"Billing Document Line Item Number", Int64.Type},
+				        {"Billing Date", type date}, {"Customer Key", Int64.Type}, {"Product Key", Int64.Type},
+				        {"Ship Date", type date}, {"OTD Indicator", type text}, {"Billing Document Type Code", type text},
+				        {"Local Currency", type text}, {"Delivery Cost", type number}, {"Net Invoice COGS", type number},
+				        {"Late Delivery Penalties", type number}, {"Overdue Payment Penalties", type number},
+				        {"Taxes & Commercial Fees", type number}, {"Freight", type number},
+				        {"Net Invoice Value", type number}, {"Net Invoice Quantity", Int64.Type}
+				    }),
+				    #"Filtered Rows" = Table.SelectRows(#"Changed Type", each [Billing Date] >= Date.From(#"RangeStart") and [Billing Date] < Date.From(#"RangeEnd")),
+				    #"Excluded Svalbard" = Table.SelectRows(#"Filtered Rows", each [Customer Key] <> 48)
+				in
+				    #"Excluded Svalbard"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

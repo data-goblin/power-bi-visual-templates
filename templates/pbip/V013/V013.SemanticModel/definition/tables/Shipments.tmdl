@@ -251,6 +251,108 @@ table Shipments
 		displayFolder: Measures
 		lineageTag: ee66dfef-47bd-40c8-9b0c-6be915c9afd4
 
+	/// 75th percentile of product revenue in the current visual/filter selection.
+	measure 'Product Revenue P75' =
+			VAR ProductsWithRevenue =
+			    FILTER (
+			        ALLSELECTED ( Product[Product Name] ),
+			        NOT ISBLANK ( [Revenue] )
+			    )
+			RETURN
+			    PERCENTILEX.INC ( ProductsWithRevenue, [Revenue], 0.75 )
+		displayFolder: Measures\Scatterplot
+		lineageTag: 6f2bb4aa-8b8c-4f21-9d8c-7413f5ab0131
+
+		formatStringDefinition =
+				VAR _Value = SELECTEDMEASURE()
+				VAR _FormatString =
+				    DaxLib.FormatString.DynamicUnits (
+				        _Value,
+				        "",
+				        "",
+				        "€",
+				        ""
+				    )
+				RETURN _FormatString
+
+	/// Overall product margin reference for the current visual/filter selection.
+	measure 'Product Margin Reference' =
+			CALCULATE (
+			    [Gross Margin %],
+			    ALLSELECTED ( Product[Product Name] )
+			)
+		formatString: #,##0.0%;-#,##0.0%;#,##0.0%
+		displayFolder: Measures\Scatterplot
+		lineageTag: 9c1caac7-1f28-4c95-8725-eac3500d0132
+
+	/// Decision-map category for product scatterplots.
+	measure 'Product Decision Zone' =
+			VAR CurrentRevenue = [Revenue]
+			VAR CurrentMargin = [Gross Margin %]
+			VAR HighRevenue = CurrentRevenue >= [Product Revenue P75]
+			VAR BelowMargin = CurrentMargin < [Product Margin Reference]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( CurrentRevenue ) || ISBLANK ( CurrentMargin ), BLANK (),
+			        HighRevenue && BelowMargin, "Investigate",
+			        HighRevenue && NOT BelowMargin, "Protect",
+			        "Other"
+			    )
+		displayFolder: Measures\Scatterplot
+		lineageTag: b7e68460-818f-4f3e-8963-8b348a2b0133
+
+	/// Hex color for field-value conditional formatting on product scatterplot markers.
+	measure 'Product Decision Color' =
+			SWITCH (
+			    [Product Decision Zone],
+			    "Investigate", "#C83E4D",
+			    "Protect", "#137C72",
+			    "Other", "#B8C0C7",
+			    "#B8C0C7"
+			)
+		displayFolder: Measures\Scatterplot
+		lineageTag: 967dcd8d-b2b8-4491-9b98-33e8eab20134
+
+	measure '# Customers with Shipments' = COUNTROWS( 'Shipments' )
+		formatString: #,##0
+		lineageTag: 3ff2f463-e0d6-4f28-8118-4ec6829bf07b
+
+	measure 'Revenue Normalized' =
+			DIVIDE (
+			    [Revenue] - MINX ( ALLSELECTED ( Product[Product Name] ),
+			[Revenue] ),
+			    MAXX ( ALLSELECTED ( Product[Product Name] ), [Revenue] )
+			        - MINX ( ALLSELECTED ( Product[Product Name] ),
+			[Revenue] )
+			)
+		displayFolder: Measures
+		lineageTag: 827e1a16-7016-4a68-93c6-8f5bdc6ffd96
+
+	/// Hex color for field-value conditional formatting on GM % YoY scatterplot markers.
+	measure 'Product GM YoY Color' =
+			VAR _YoY = [Gross Margin % YoY]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( _YoY ), "#B8C0C7",
+			        _YoY > 0, "#137C72",
+			        _YoY < 0, "#C83E4D",
+			        "#B8C0C7"
+			    )
+		displayFolder: Measures\Scatterplot
+		lineageTag: 967dcd8d-b2b8-4491-9b98-33e8eab20135
+
+	measure 'Revenue YoY % Abs' = ABS ( [Revenue YoY %] )
+		formatString: ↑#,##0.0%;↓#,##0.0%;#,##0.0%
+		displayFolder: Measures
+		lineageTag: 81b8f6d3-a2c8-4705-8e67-b2e7e6f0c0c5
+
+	measure 'Gross Margin YoY % Abs' = ABS( [Gross Margin % YoY])
+		formatString: ↑#,##0.0%;↓#,##0.0%;#,##0.0%
+		displayFolder: Measures
+		lineageTag: 199fcb0d-04a6-46f5-a55b-51534b2c02a2
+
 	column 'Billing Document Number'
 		dataType: string
 		isHidden

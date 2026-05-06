@@ -343,24 +343,21 @@ table Shipments
 		displayFolder: Measures\Scatterplot
 		lineageTag: 967dcd8d-b2b8-4491-9b98-33e8eab20135
 
-	/// 5-band hex color for Revenue YoY % conditional formatting on the CY-vs-PY scatter.
-	/// Anchors gray at the symmetry diagonal: products inside ±2% YoY render neutral
-	/// regardless of the data range, so bubble color aligns with symmetry shading.
-	/// ±2% = "essentially flat" cluster (5 products, all within ±1.5%).
-	/// ±10% = portfolio-level "meaningful change" boundary (matches the IQR).
+	/// 3-band hex color for Revenue YoY % conditional formatting on the CY-vs-PY scatter.
+	/// Mutes products within ±15% YoY so the genuine outliers (top/bottom tails)
+	/// pop visually. Gray anchors at the symmetry diagonal by construction.
+	/// ±15% lines up with the outer edge of the portfolio IQR — beyond what a
+	/// typical product moves YoY, so worth the reader's attention.
 	measure 'Product Revenue YoY Performance Color' =
 			VAR _YoY = [Revenue YoY %]
-			VAR _Flat = 0.02
-			VAR _Significant = 0.10
+			VAR _Threshold = 0.15
 			RETURN
 			    SWITCH (
 			        TRUE (),
-			        ISBLANK ( _YoY ),     "#6B7B8D",
-			        _YoY < -_Significant, "#D4654A",
-			        _YoY < -_Flat,        "#EAB2A5",
-			        _YoY <= _Flat,        "#6B7B8D",
-			        _YoY <= _Significant, "#85D6D6",
-			        "#0AADAD"
+			        ISBLANK ( _YoY ),    "#6B7B8D",
+			        _YoY < -_Threshold,  "#D4654A",
+			        _YoY > _Threshold,   "#0AADAD",
+			        "#6B7B8D"
 			    )
 		displayFolder: Measures\Scatterplot
 		lineageTag: 967dcd8d-b2b8-4491-9b98-33e8eab20136

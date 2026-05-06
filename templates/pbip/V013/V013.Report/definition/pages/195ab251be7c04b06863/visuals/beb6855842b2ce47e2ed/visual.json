@@ -216,24 +216,6 @@
                   "Value": "'Current Year'"
                 }
               }
-            },
-            "gridlineShow": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "gridlineColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#DDE2E8'"
-                    }
-                  }
-                }
-              }
             }
           }
         }
@@ -323,21 +305,6 @@
               "expr": {
                 "Literal": {
                   "Value": "'YoY %'"
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
-    "visualContainerObjects": {
-      "border": [
-        {
-          "properties": {
-            "radius": {
-              "expr": {
-                "Literal": {
-                  "Value": "6D"
                 }
               }
             }

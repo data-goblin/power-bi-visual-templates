@@ -81,24 +81,6 @@
                   "Value": "1D"
                 }
               }
-            },
-            "gridlineShow": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "gridlineColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#DDE2E8'"
-                    }
-                  }
-                }
-              }
             }
           }
         }
@@ -306,19 +288,6 @@
           }
         }
       ],
-      "markers": [
-        {
-          "properties": {
-            "transparency": {
-              "expr": {
-                "Literal": {
-                  "Value": "66D"
-                }
-              }
-            }
-          }
-        }
-      ],
       "dataPoint": [
         {
           "properties": {
@@ -357,21 +326,6 @@
               "expr": {
                 "Literal": {
                   "Value": "'auto'"
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
-    "visualContainerObjects": {
-      "border": [
-        {
-          "properties": {
-            "radius": {
-              "expr": {
-                "Literal": {
-                  "Value": "6D"
                 }
               }
             }

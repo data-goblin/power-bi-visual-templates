@@ -778,7 +778,7 @@
               }
             },
             "show": true,
-            "radius": 10
+            "radius": 6
           }
         ],
         "dropShadow": [
@@ -886,7 +886,7 @@
             "borderTransparency": 0,
             "borderWidth": 1,
             "rotation": 45,
-            "transparency": 0
+            "transparency": 66
           }
         ]
       }
@@ -1653,6 +1653,16 @@
         "labels": [
           {
             "show": false
+          }
+        ],
+        "categoryAxis": [
+          {
+            "gridlineShow": true,
+            "gridlineColor": {
+              "solid": {
+                "color": "#DDE2E8"
+              }
+            }
           }
         ]
       }

@@ -236,21 +236,21 @@
                           "min": {
                             "color": {
                               "Literal": {
-                                "Value": "'#C83E4D'"
+                                "Value": "'#c2255c'"
                               }
                             }
                           },
                           "mid": {
                             "color": {
                               "Literal": {
-                                "Value": "'#B8C0C7'"
+                                "Value": "'#ABABAB'"
                               }
                             }
                           },
                           "max": {
                             "color": {
                               "Literal": {
-                                "Value": "'#137C72'"
+                                "Value": "'#2D6390'"
                               }
                             }
                           },

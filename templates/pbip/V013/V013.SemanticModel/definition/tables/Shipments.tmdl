@@ -306,10 +306,10 @@ table Shipments
 	measure 'Product Decision Color' =
 			SWITCH (
 			    [Product Decision Zone],
-			    "Investigate", "#C83E4D",
-			    "Protect", "#137C72",
-			    "Other", "#B8C0C7",
-			    "#B8C0C7"
+			    "Investigate", "#c2255c",
+			    "Protect", "#2D6390",
+			    "Other", "#ABABAB",
+			    "#ABABAB"
 			)
 		displayFolder: Measures\Scatterplot
 		lineageTag: 967dcd8d-b2b8-4491-9b98-33e8eab20134
@@ -335,10 +335,10 @@ table Shipments
 			RETURN
 			    SWITCH (
 			        TRUE (),
-			        ISBLANK ( _YoY ), "#B8C0C7",
-			        _YoY > 0, "#137C72",
-			        _YoY < 0, "#C83E4D",
-			        "#B8C0C7"
+			        ISBLANK ( _YoY ), "#ABABAB",
+			        _YoY > 0, "#2D6390",
+			        _YoY < 0, "#c2255c",
+			        "#ABABAB"
 			    )
 		displayFolder: Measures\Scatterplot
 		lineageTag: 967dcd8d-b2b8-4491-9b98-33e8eab20135

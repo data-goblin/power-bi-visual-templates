@@ -1101,6 +1101,21 @@
             "left": 0,
             "right": 0
           }
+        ],
+        "outline": [
+          {
+            "show": false
+          }
+        ],
+        "title": [
+          {
+            "show": false
+          }
+        ],
+        "border": [
+          {
+            "show": false
+          }
         ]
       }
     },

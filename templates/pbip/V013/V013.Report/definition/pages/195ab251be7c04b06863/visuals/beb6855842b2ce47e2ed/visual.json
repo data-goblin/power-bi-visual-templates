@@ -6,7 +6,7 @@
     "y": 20,
     "z": 1000,
     "height": 585.71428571428578,
-    "width": 535.71428571428578,
+    "width": 540,
     "tabOrder": 1000
   },
   "visual": {
@@ -149,7 +149,7 @@
                 "color": {
                   "expr": {
                     "ThemeDataColor": {
-                      "ColorId": 4,
+                      "ColorId": 2,
                       "Percent": 0
                     }
                   }
@@ -182,6 +182,13 @@
                   "Value": "'PY'"
                 }
               }
+            },
+            "gridlineShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
             }
           }
         }
@@ -209,6 +216,24 @@
                   "Value": "'Current Year'"
                 }
               }
+            },
+            "gridlineShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "gridlineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#DDE2E8'"
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -220,49 +245,13 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "FillRule": {
-                      "Input": {
-                        "Measure": {
-                          "Expression": {
-                            "SourceRef": {
-                              "Entity": "Shipments"
-                            }
-                          },
-                          "Property": "Revenue YoY %"
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Shipments"
                         }
                       },
-                      "FillRule": {
-                        "linearGradient3": {
-                          "min": {
-                            "color": {
-                              "Literal": {
-                                "Value": "'#c2255c'"
-                              }
-                            }
-                          },
-                          "mid": {
-                            "color": {
-                              "Literal": {
-                                "Value": "'#ABABAB'"
-                              }
-                            }
-                          },
-                          "max": {
-                            "color": {
-                              "Literal": {
-                                "Value": "'#2D6390'"
-                              }
-                            }
-                          },
-                          "nullColoringStrategy": {
-                            "strategy": {
-                              "Literal": {
-                                "Value": "'asZero'"
-                              }
-                            }
-                          }
-                        }
-                      }
+                      "Property": "Product Revenue YoY Performance Color"
                     }
                   }
                 }
@@ -334,6 +323,21 @@
               "expr": {
                 "Literal": {
                   "Value": "'YoY %'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "border": [
+        {
+          "properties": {
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "6D"
                 }
               }
             }

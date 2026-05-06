@@ -306,10 +306,10 @@ table Shipments
 	measure 'Product Decision Color' =
 			SWITCH (
 			    [Product Decision Zone],
-			    "Investigate", "#c2255c",
-			    "Protect", "#2D6390",
-			    "Other", "#ABABAB",
-			    "#ABABAB"
+			    "Investigate", "#D4654A",
+			    "Protect", "#0AADAD",
+			    "Other", "#6B7B8D",
+			    "#6B7B8D"
 			)
 		displayFolder: Measures\Scatterplot
 		lineageTag: 967dcd8d-b2b8-4491-9b98-33e8eab20134
@@ -335,13 +335,35 @@ table Shipments
 			RETURN
 			    SWITCH (
 			        TRUE (),
-			        ISBLANK ( _YoY ), "#ABABAB",
-			        _YoY > 0, "#2D6390",
-			        _YoY < 0, "#c2255c",
-			        "#ABABAB"
+			        ISBLANK ( _YoY ), "#6B7B8D",
+			        _YoY > 0, "#0AADAD",
+			        _YoY < 0, "#D4654A",
+			        "#6B7B8D"
 			    )
 		displayFolder: Measures\Scatterplot
 		lineageTag: 967dcd8d-b2b8-4491-9b98-33e8eab20135
+
+	/// 5-band hex color for Revenue YoY % conditional formatting on the CY-vs-PY scatter.
+	/// Anchors gray at the symmetry diagonal: products inside ±2% YoY render neutral
+	/// regardless of the data range, so bubble color aligns with symmetry shading.
+	/// ±2% = "essentially flat" cluster (5 products, all within ±1.5%).
+	/// ±10% = portfolio-level "meaningful change" boundary (matches the IQR).
+	measure 'Product Revenue YoY Performance Color' =
+			VAR _YoY = [Revenue YoY %]
+			VAR _Flat = 0.02
+			VAR _Significant = 0.10
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( _YoY ),     "#6B7B8D",
+			        _YoY < -_Significant, "#D4654A",
+			        _YoY < -_Flat,        "#EAB2A5",
+			        _YoY <= _Flat,        "#6B7B8D",
+			        _YoY <= _Significant, "#85D6D6",
+			        "#0AADAD"
+			    )
+		displayFolder: Measures\Scatterplot
+		lineageTag: 967dcd8d-b2b8-4491-9b98-33e8eab20136
 
 	measure 'Revenue YoY % Abs' = ABS ( [Revenue YoY %] )
 		formatString: ↑#,##0.0%;↓#,##0.0%;#,##0.0%

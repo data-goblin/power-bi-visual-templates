@@ -18,7 +18,7 @@ table Shipments
 		lineageTag: f1000001-0001-0001-0001-000000000001
 
 		formatStringDefinition =
-				VAR _Value = SELECTEDMEASURE()
+				VAR _Value = ABS ( CALCULATE ( SELECTEDMEASURE (), ALLSELECTED () ) )
 				VAR _FormatString =
 				    DaxLib.FormatString.DynamicUnits (
 				        _Value,
@@ -46,7 +46,7 @@ table Shipments
 		lineageTag: f1000001-0001-0001-0001-000000000003
 
 		formatStringDefinition =
-				VAR _Value = SELECTEDMEASURE()
+				VAR _Value = ABS ( CALCULATE ( SELECTEDMEASURE (), ALLSELECTED () ) )
 				VAR _FormatString =
 				    DaxLib.FormatString.DynamicUnits (
 				        _Value,
@@ -68,7 +68,7 @@ table Shipments
 		lineageTag: f1000001-0001-0001-0001-000000000004
 
 		formatStringDefinition =
-				VAR _Value = SELECTEDMEASURE()
+				VAR _Value = ABS ( CALCULATE ( SELECTEDMEASURE (), ALLSELECTED () ) )
 				VAR _FormatString =
 				    DaxLib.FormatString.DynamicUnits (
 				        _Value,
@@ -90,7 +90,7 @@ table Shipments
 		lineageTag: fc9b595f-fea8-423f-afff-abece8b80299
 
 		formatStringDefinition =
-				VAR _Value = SELECTEDMEASURE()
+				VAR _Value = ABS ( CALCULATE ( SELECTEDMEASURE (), ALLSELECTED () ) )
 				VAR _FormatString =
 				    DaxLib.FormatString.DynamicUnits (
 				        _Value,
@@ -124,7 +124,7 @@ table Shipments
 		lineageTag: f1000001-0001-0001-0001-000000000010
 
 		formatStringDefinition =
-				VAR _Value = SELECTEDMEASURE()
+				VAR _Value = ABS ( CALCULATE ( SELECTEDMEASURE (), ALLSELECTED () ) )
 				VAR _FormatString =
 				    DaxLib.FormatString.DynamicUnits (
 				        _Value,
@@ -147,7 +147,7 @@ table Shipments
 		lineageTag: d16fdaaf-311b-46ce-9620-9bf01010cb51
 
 		formatStringDefinition =
-				VAR _Value = SELECTEDMEASURE()
+				VAR _Value = ABS ( CALCULATE ( SELECTEDMEASURE (), ALLSELECTED () ) )
 				VAR _FormatString =
 				    DaxLib.FormatString.DynamicUnits (
 				        _Value,
@@ -170,7 +170,7 @@ table Shipments
 		lineageTag: 8d0781f5-10cb-4a02-82b5-feebfc41c046
 
 		formatStringDefinition =
-				VAR _Value = SELECTEDMEASURE()
+				VAR _Value = ABS ( CALCULATE ( SELECTEDMEASURE (), ALLSELECTED () ) )
 				VAR _FormatString =
 				    DaxLib.FormatString.DynamicUnits (
 				        _Value,
@@ -187,7 +187,7 @@ table Shipments
 		lineageTag: e8d175ac-745e-4af0-b577-63086623c683
 
 		formatStringDefinition =
-				VAR _Value = SELECTEDMEASURE()
+				VAR _Value = ABS ( CALCULATE ( SELECTEDMEASURE (), ALLSELECTED () ) )
 				VAR _FormatString =
 				    DaxLib.FormatString.DynamicUnits (
 				        _Value,
@@ -210,7 +210,7 @@ table Shipments
 		lineageTag: e15946c8-2c6e-47f2-ba9d-dfaac2e64d8b
 
 		formatStringDefinition =
-				VAR _Value = SELECTEDMEASURE()
+				VAR _Value = ABS ( CALCULATE ( SELECTEDMEASURE (), ALLSELECTED () ) )
 				VAR _FormatString =
 				    DaxLib.FormatString.DynamicUnits (
 				        _Value,
@@ -227,7 +227,7 @@ table Shipments
 		lineageTag: ababca69-61d2-4ceb-8239-3e70411266c5
 
 		formatStringDefinition =
-				VAR _Value = SELECTEDMEASURE()
+				VAR _Value = ABS ( CALCULATE ( SELECTEDMEASURE (), ALLSELECTED () ) )
 				VAR _FormatString =
 				    DaxLib.FormatString.DynamicUnits (
 				        _Value,
@@ -264,7 +264,7 @@ table Shipments
 		lineageTag: 6f2bb4aa-8b8c-4f21-9d8c-7413f5ab0131
 
 		formatStringDefinition =
-				VAR _Value = SELECTEDMEASURE()
+				VAR _Value = ABS ( CALCULATE ( SELECTEDMEASURE (), ALLSELECTED () ) )
 				VAR _FormatString =
 				    DaxLib.FormatString.DynamicUnits (
 				        _Value,

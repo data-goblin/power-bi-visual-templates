@@ -148,9 +148,10 @@ table Customer
 				        {"Customer Key", Int64.Type}, {"Customer Sold-To Name", type text}, {"Account Name", type text},
 				        {"Key Account Name", type text}, {"Transaction Type", type text}, {"Account Type", type text},
 				        {"Station", type text}, {"Account Manager", type text}, {"Key Account Manager", type text}
-				    })
+				    }),
+				    #"Excluded Svalbard" = Table.SelectRows(#"Changed Type", each [Station] <> "Svalbard Spur")
 				in
-				    #"Changed Type"
+				    #"Excluded Svalbard"
 
 	annotation PBI_NavigationStepName = Navigation
 

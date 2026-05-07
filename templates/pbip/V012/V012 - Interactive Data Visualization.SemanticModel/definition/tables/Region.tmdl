@@ -166,9 +166,10 @@ table Region
 				        {"All", type text}, {"Station Sales Managers", type text}, {"System Regional Managers", type text},
 				        {"System Sales Directors", type text}, {"Tax Rate", type number},
 				        {"Creature Threat Level", type text}, {"Piracy Risk", type text}, {"Convoy Requirement", type text}
-				    })
+				    }),
+				    #"Excluded Svalbard" = Table.SelectRows(#"Changed Type", each [Station] <> "Svalbard Spur")
 				in
-				    #"Changed Type"
+				    #"Excluded Svalbard"
 
 	annotation PBI_NavigationStepName = Navigation
 

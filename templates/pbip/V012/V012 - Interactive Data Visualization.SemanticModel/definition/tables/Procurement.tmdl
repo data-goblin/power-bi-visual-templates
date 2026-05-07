@@ -181,9 +181,10 @@ table Procurement
 				        {"Purchase Value", type number}, {"Purchase Quantity", Int64.Type},
 				        {"Purchase Weight", type number}, {"Inbound Freight", type number}
 				    }),
-				    #"Filtered Rows" = Table.SelectRows(#"Changed Type", each [Purchase Date] >= Date.From(#"RangeStart") and [Purchase Date] < Date.From(#"RangeEnd"))
+				    #"Filtered Rows" = Table.SelectRows(#"Changed Type", each [Purchase Date] >= Date.From(#"RangeStart") and [Purchase Date] < Date.From(#"RangeEnd")),
+				    #"Excluded Svalbard" = Table.SelectRows(#"Filtered Rows", each [Receiving Settlement] <> "Svalbard Spur")
 				in
-				    #"Filtered Rows"
+				    #"Excluded Svalbard"
 
 	annotation PBI_NavigationStepName = Navigation
 

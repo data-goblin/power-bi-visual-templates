@@ -765,9 +765,10 @@ table Shipments
 				        {"Taxes & Commercial Fees", type number}, {"Freight", type number},
 				        {"Net Invoice Value", type number}, {"Net Invoice Quantity", Int64.Type}
 				    }),
-				    #"Filtered Rows" = Table.SelectRows(#"Changed Type", each [Billing Date] >= Date.From(#"RangeStart") and [Billing Date] < Date.From(#"RangeEnd"))
+				    #"Filtered Rows" = Table.SelectRows(#"Changed Type", each [Billing Date] >= Date.From(#"RangeStart") and [Billing Date] < Date.From(#"RangeEnd")),
+				    #"Excluded Svalbard" = Table.SelectRows(#"Filtered Rows", each [Customer Key] <> 48)
 				in
-				    #"Filtered Rows"
+				    #"Excluded Svalbard"
 
 	annotation PBI_NavigationStepName = Navigation
 

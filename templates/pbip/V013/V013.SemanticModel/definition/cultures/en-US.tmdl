@@ -13716,13 +13716,13 @@ cultureInfo en-US
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "Shipments",
-			          "ConceptualProperty": "Gross Margin % (PY)"
+			          "ConceptualProperty": "Gross Margin % PY"
 			        }
 			      },
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "gross margin % (PY)": {
+			          "gross margin % PY": {
 			            "State": "Generated"
 			          }
 			        },
@@ -13824,13 +13824,13 @@ cultureInfo en-US
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "Shipments",
-			          "ConceptualProperty": "Gross Profit (PY)"
+			          "ConceptualProperty": "Gross Profit PY"
 			        }
 			      },
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "gross profit (PY)": {
+			          "gross profit PY": {
 			            "State": "Generated"
 			          }
 			        },
@@ -17170,7 +17170,7 @@ cultureInfo en-US
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "Shipments",
-			          "ConceptualProperty": "_Gross Profit (PY) FormatString"
+			          "ConceptualProperty": "_Gross Profit PY FormatString"
 			        }
 			      },
 			      "State": "Generated",
@@ -17179,7 +17179,7 @@ cultureInfo en-US
 			      },
 			      "Terms": [
 			        {
-			          "_gross profit (PY) FormatString": {
+			          "_gross profit PY FormatString": {
 			            "State": "Generated"
 			          }
 			        }
@@ -17342,13 +17342,13 @@ cultureInfo en-US
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "Shipments",
-			          "ConceptualProperty": "Revenue (PY)"
+			          "ConceptualProperty": "Revenue PY"
 			        }
 			      },
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "revenue (PY)": {
+			          "revenue PY": {
 			            "State": "Generated"
 			          }
 			        },
@@ -17420,7 +17420,7 @@ cultureInfo en-US
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "Shipments",
-			          "ConceptualProperty": "COGS (PY)"
+			          "ConceptualProperty": "COGS PY"
 			        }
 			      },
 			      "State": "Generated",
@@ -17892,7 +17892,7 @@ cultureInfo en-US
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "Shipments",
-			          "ConceptualProperty": "_Revenue (PY) FormatString"
+			          "ConceptualProperty": "_Revenue PY FormatString"
 			        }
 			      },
 			      "State": "Generated",
@@ -17901,7 +17901,7 @@ cultureInfo en-US
 			      },
 			      "Terms": [
 			        {
-			          "_revenue (PY) FormatString": {
+			          "_revenue PY FormatString": {
 			            "State": "Generated"
 			          }
 			        }
@@ -17930,7 +17930,7 @@ cultureInfo en-US
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "Shipments",
-			          "ConceptualProperty": "_COGS (PY) FormatString"
+			          "ConceptualProperty": "_COGS PY FormatString"
 			        }
 			      },
 			      "State": "Generated",
@@ -17939,7 +17939,7 @@ cultureInfo en-US
 			      },
 			      "Terms": [
 			        {
-			          "_COGS (PY) FormatString": {
+			          "_COGS PY FormatString": {
 			            "State": "Generated"
 			          }
 			        }
@@ -18853,7 +18853,7 @@ cultureInfo en-US
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "Shipments",
-			          "ConceptualProperty": "CF - Tooltip Gross Margin % (PY)"
+			          "ConceptualProperty": "CF - Tooltip Gross Margin % PY"
 			        }
 			      },
 			      "State": "Generated"

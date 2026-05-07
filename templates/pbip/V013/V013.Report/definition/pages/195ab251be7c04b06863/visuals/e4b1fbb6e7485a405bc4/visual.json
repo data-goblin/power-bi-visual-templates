@@ -5,7 +5,7 @@
     "x": 20,
     "y": 20,
     "z": 0,
-    "height": 585,
+    "height": 540,
     "width": 500,
     "tabOrder": 0
   },
@@ -97,11 +97,11 @@
                       "Entity": "Shipments"
                     }
                   },
-                  "Property": "Revenue (PY)"
+                  "Property": "Revenue PY"
                 }
               },
-              "queryRef": "Shipments.Revenue (PY)",
-              "nativeQueryRef": "Revenue (PY)"
+              "queryRef": "Shipments.Revenue PY",
+              "nativeQueryRef": "Revenue PY"
             }
           ]
         }
@@ -182,6 +182,62 @@
                   "Value": "'PY'"
                 }
               }
+            },
+            "gridlineShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "start": {
+              "expr": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Shipments"
+                    }
+                  },
+                  "Property": "Scatter Product Revenue PY Y Min"
+                }
+              }
+            },
+            "end": {
+              "expr": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Shipments"
+                    }
+                  },
+                  "Property": "Scatter Product Revenue PY Y Max"
+                }
+              }
+            },
+            "titleFontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "titleColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#6B7B8D'"
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -209,6 +265,48 @@
                   "Value": "'Current Year'"
                 }
               }
+            },
+            "start": {
+              "expr": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Shipments"
+                    }
+                  },
+                  "Property": "Scatter Product Revenue X Min"
+                }
+              }
+            },
+            "end": {
+              "expr": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Shipments"
+                    }
+                  },
+                  "Property": "Scatter Product Revenue X Max"
+                }
+              }
+            },
+            "titleFontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            },
+            "titleColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#6B7B8D'"
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -226,7 +324,7 @@
                           "Entity": "Shipments"
                         }
                       },
-                      "Property": "Product Revenue YoY Performance Color"
+                      "Property": "Product Revenue YoY Color"
                     }
                   }
                 }
@@ -285,6 +383,13 @@
               "expr": {
                 "Literal": {
                   "Value": "'circle'"
+                }
+              }
+            },
+            "bubbleSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "-12L"
                 }
               }
             }

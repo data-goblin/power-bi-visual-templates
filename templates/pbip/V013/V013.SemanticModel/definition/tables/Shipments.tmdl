@@ -80,7 +80,7 @@ table Shipments
 				RETURN _FormatString
 
 	/// Gross Profit from the same period one year prior, used for year-over-year comparisons.
-	measure 'Gross Profit (PY)' =
+	measure 'Gross Profit PY' =
 			CALCULATE (
 			    [Gross Profit],
 			    DATEADD ( 'Date'[Date], -1, YEAR ),
@@ -102,13 +102,13 @@ table Shipments
 				RETURN _FormatString
 
 	/// Year-over-year change in Gross Profit expressed as a percentage.
-	measure 'Gross Profit YoY %' = DIVIDE ( [Gross Profit] - [Gross Profit (PY)], [Gross Profit (PY)] )
+	measure 'Gross Profit YoY %' = DIVIDE ( [Gross Profit] - [Gross Profit PY], [Gross Profit PY] )
 		formatString: ↑#,##0.0%;↓#,##0.0%;#,##0.0%
 		displayFolder: Measures
 		lineageTag: fc9b595f-fea8-423f-afff-abece8b80301
 
 	/// Gross Margin % from the same period one year prior, used for year-over-year comparisons.
-	measure 'Gross Margin % (PY)' =
+	measure 'Gross Margin % PY' =
 			CALCULATE (
 			    [Gross Margin %],
 			    DATEADD ( 'Date'[Date], -1, YEAR ),
@@ -136,13 +136,13 @@ table Shipments
 				RETURN _FormatString
 
 	/// Year-over-year change in Gross Margin % expressed in percentage points.
-	measure 'Gross Margin % YoY' = [Gross Margin %] - [Gross Margin % (PY)]
+	measure 'Gross Margin % YoY' = [Gross Margin %] - [Gross Margin % PY]
 		formatString: ↑#,##0.0%;↓#,##0.0%;#,##0.0%
 		displayFolder: Measures
 		lineageTag: b7ceff5b-356a-4f7d-9f7a-e05c1a2b6410
 
 	/// Year-over-year change in Revenue (current period minus prior year).
-	measure 'Revenue YoY' = [Revenue] - [Revenue (PY)]
+	measure 'Revenue YoY' = [Revenue] - [Revenue PY]
 		displayFolder: Measures
 		lineageTag: d16fdaaf-311b-46ce-9620-9bf01010cb51
 
@@ -160,7 +160,7 @@ table Shipments
 				    "↑" & _FormatString & ";↓" & _FormatString & ";" & _FormatString
 
 	/// Revenue from the same period one year prior, used for year-over-year comparisons.
-	measure 'Revenue (PY)' =
+	measure 'Revenue PY' =
 			CALCULATE (
 			    [Revenue],
 			    DATEADD ( 'Date'[Date], -1, YEAR ),
@@ -182,7 +182,7 @@ table Shipments
 				RETURN _FormatString
 
 	/// Year-over-year change in COGS (current period minus prior year).
-	measure 'COGS YoY' = [COGS] - [COGS (PY)]
+	measure 'COGS YoY' = [COGS] - [COGS PY]
 		displayFolder: Measures
 		lineageTag: e8d175ac-745e-4af0-b577-63086623c683
 
@@ -200,7 +200,7 @@ table Shipments
 				    "↑" & _FormatString & ";↓" & _FormatString & ";" & _FormatString
 
 	/// COGS from the same period one year prior, used for year-over-year comparisons.
-	measure 'COGS (PY)' =
+	measure 'COGS PY' =
 			CALCULATE (
 			    [COGS],
 			    DATEADD ( 'Date'[Date], -1, YEAR ),
@@ -222,7 +222,7 @@ table Shipments
 				RETURN _FormatString
 
 	/// Year-over-year change in Gross Profit (current period minus prior year).
-	measure 'Gross Profit YoY' = [Gross Profit] - [Gross Profit (PY)]
+	measure 'Gross Profit YoY' = [Gross Profit] - [Gross Profit PY]
 		displayFolder: Measures
 		lineageTag: ababca69-61d2-4ceb-8239-3e70411266c5
 
@@ -240,13 +240,13 @@ table Shipments
 				    "↑" & _FormatString & ";↓" & _FormatString & ";" & _FormatString
 
 	/// Year-over-year change in Revenue expressed as a percentage.
-	measure 'Revenue YoY %' = DIVIDE( [Revenue YoY], [Revenue (PY)] )
+	measure 'Revenue YoY %' = DIVIDE( [Revenue YoY], [Revenue PY] )
 		formatString: ↑#,##0.0%;↓#,##0.0%;#,##0.0%
 		displayFolder: Measures
 		lineageTag: dfd55801-a17b-42bf-959a-7308d777ff8c
 
 	/// Year-over-year change in COGS expressed as a percentage.
-	measure 'COGS YoY %' = DIVIDE ( [COGS] - [COGS (PY)], [COGS (PY)] )
+	measure 'COGS YoY %' = DIVIDE ( [COGS] - [COGS PY], [COGS PY] )
 		formatString: ↑#,##0.0%;↓#,##0.0%;#,##0.0%
 		displayFolder: Measures
 		lineageTag: ee66dfef-47bd-40c8-9b0c-6be915c9afd4
@@ -343,12 +343,22 @@ table Shipments
 		displayFolder: Measures\Scatterplot
 		lineageTag: 967dcd8d-b2b8-4491-9b98-33e8eab20135
 
+	measure 'Revenue YoY % Abs' = ABS ( [Revenue YoY %] )
+		formatString: ↑#,##0.0%;↓#,##0.0%;#,##0.0%
+		displayFolder: Measures
+		lineageTag: 81b8f6d3-a2c8-4705-8e67-b2e7e6f0c0c5
+
+	measure 'Gross Margin YoY % Abs' = ABS( [Gross Margin % YoY])
+		formatString: ↑#,##0.0%;↓#,##0.0%;#,##0.0%
+		displayFolder: Measures
+		lineageTag: 199fcb0d-04a6-46f5-a55b-51534b2c02a2
+
 	/// 3-band hex color for Revenue YoY % conditional formatting on the CY-vs-PY scatter.
 	/// Mutes products within ±15% YoY so the genuine outliers (top/bottom tails)
 	/// pop visually. Gray anchors at the symmetry diagonal by construction.
 	/// ±15% lines up with the outer edge of the portfolio IQR — beyond what a
 	/// typical product moves YoY, so worth the reader's attention.
-	measure 'Product Revenue YoY Performance Color' =
+	measure 'Product Revenue YoY Color' =
 			VAR _YoY = [Revenue YoY %]
 			VAR _Threshold = 0.15
 			RETURN
@@ -362,15 +372,181 @@ table Shipments
 		displayFolder: Measures\Scatterplot
 		lineageTag: 967dcd8d-b2b8-4491-9b98-33e8eab20136
 
-	measure 'Revenue YoY % Abs' = ABS ( [Revenue YoY %] )
-		formatString: ↑#,##0.0%;↓#,##0.0%;#,##0.0%
-		displayFolder: Measures
-		lineageTag: 81b8f6d3-a2c8-4705-8e67-b2e7e6f0c0c5
+	/// Lower X bound for the customer-grain CY-vs-PY scatter. Iterates customers
+	/// and pads outward so the leftmost bubble is not clipped.
+	measure 'Scatter Customer Revenue X Min' =
+			VAR _Pad = 0.08
+			VAR _Points =
+			    FILTER (
+			        ADDCOLUMNS (
+			            VALUES ( Customer[Customer Sold-To Name] ),
+			            "@X", [Revenue]
+			        ),
+			        NOT ISBLANK ( [@X] )
+			    )
+			VAR _Min = MINX ( _Points, [@X] )
+			VAR _Max = MAXX ( _Points, [@X] )
+			VAR _Range = _Max - _Min
+			VAR _Nudge =
+			    IF ( _Range = 0, ABS ( _Max ) * 0.1, _Range * _Pad )
+			RETURN
+			    _Min - _Nudge
+		displayFolder: Measures\Scatterplot
+		lineageTag: 967dcd8d-b2b8-4491-9b98-33e8eab20140
 
-	measure 'Gross Margin YoY % Abs' = ABS( [Gross Margin % YoY])
-		formatString: ↑#,##0.0%;↓#,##0.0%;#,##0.0%
-		displayFolder: Measures
-		lineageTag: 199fcb0d-04a6-46f5-a55b-51534b2c02a2
+	/// Upper X bound for the customer-grain CY-vs-PY scatter.
+	/// Mirror of Scatter Customer Revenue X Min.
+	measure 'Scatter Customer Revenue X Max' =
+			VAR _Pad = 0.08
+			VAR _Points =
+			    FILTER (
+			        ADDCOLUMNS (
+			            VALUES ( Customer[Customer Sold-To Name] ),
+			            "@X", [Revenue]
+			        ),
+			        NOT ISBLANK ( [@X] )
+			    )
+			VAR _Min = MINX ( _Points, [@X] )
+			VAR _Max = MAXX ( _Points, [@X] )
+			VAR _Range = _Max - _Min
+			VAR _Nudge =
+			    IF ( _Range = 0, ABS ( _Max ) * 0.1, _Range * _Pad )
+			RETURN
+			    _Max + _Nudge
+		displayFolder: Measures\Scatterplot
+		lineageTag: 967dcd8d-b2b8-4491-9b98-33e8eab20141
+
+	/// Lower Y bound for the customer-grain CY-vs-PY scatter (Revenue PY axis).
+	/// Padded so the bottom bubble is not clipped against the plot edge.
+	measure 'Scatter Customer Revenue PY Y Min' =
+			VAR _Pad = 0.08
+			VAR _Points =
+			    FILTER (
+			        ADDCOLUMNS (
+			            VALUES ( Customer[Customer Sold-To Name] ),
+			            "@Y", [Revenue PY]
+			        ),
+			        NOT ISBLANK ( [@Y] )
+			    )
+			VAR _Min = MINX ( _Points, [@Y] )
+			VAR _Max = MAXX ( _Points, [@Y] )
+			VAR _Range = _Max - _Min
+			VAR _Nudge =
+			    IF ( _Range = 0, ABS ( _Max ) * 0.1, _Range * _Pad )
+			RETURN
+			    _Min - _Nudge
+		displayFolder: Measures\Scatterplot
+		lineageTag: 967dcd8d-b2b8-4491-9b98-33e8eab20142
+
+	/// Upper Y bound for the customer-grain CY-vs-PY scatter.
+	/// Mirror of Scatter Customer Revenue PY Y Min.
+	measure 'Scatter Customer Revenue PY Y Max' =
+			VAR _Pad = 0.08
+			VAR _Points =
+			    FILTER (
+			        ADDCOLUMNS (
+			            VALUES ( Customer[Customer Sold-To Name] ),
+			            "@Y", [Revenue PY]
+			        ),
+			        NOT ISBLANK ( [@Y] )
+			    )
+			VAR _Min = MINX ( _Points, [@Y] )
+			VAR _Max = MAXX ( _Points, [@Y] )
+			VAR _Range = _Max - _Min
+			VAR _Nudge =
+			    IF ( _Range = 0, ABS ( _Max ) * 0.1, _Range * _Pad )
+			RETURN
+			    _Max + _Nudge
+		displayFolder: Measures\Scatterplot
+		lineageTag: 967dcd8d-b2b8-4491-9b98-33e8eab20143
+
+	/// Lower X bound for the product-grain CY-vs-PY scatter. Iterates products
+	/// and pads outward so the leftmost bubble is not clipped.
+	measure 'Scatter Product Revenue X Min' =
+			VAR _Pad = 0.08
+			VAR _Points =
+			    FILTER (
+			        ADDCOLUMNS (
+			            VALUES ( Product[Product Name] ),
+			            "@X", [Revenue]
+			        ),
+			        NOT ISBLANK ( [@X] )
+			    )
+			VAR _Min = MINX ( _Points, [@X] )
+			VAR _Max = MAXX ( _Points, [@X] )
+			VAR _Range = _Max - _Min
+			VAR _Nudge =
+			    IF ( _Range = 0, ABS ( _Max ) * 0.1, _Range * _Pad )
+			RETURN
+			    _Min - _Nudge
+		displayFolder: Measures\Scatterplot
+		lineageTag: 967dcd8d-b2b8-4491-9b98-33e8eab20144
+
+	/// Upper X bound for the product-grain CY-vs-PY scatter.
+	/// Mirror of Scatter Product Revenue X Min.
+	measure 'Scatter Product Revenue X Max' =
+			VAR _Pad = 0.08
+			VAR _Points =
+			    FILTER (
+			        ADDCOLUMNS (
+			            VALUES ( Product[Product Name] ),
+			            "@X", [Revenue]
+			        ),
+			        NOT ISBLANK ( [@X] )
+			    )
+			VAR _Min = MINX ( _Points, [@X] )
+			VAR _Max = MAXX ( _Points, [@X] )
+			VAR _Range = _Max - _Min
+			VAR _Nudge =
+			    IF ( _Range = 0, ABS ( _Max ) * 0.1, _Range * _Pad )
+			RETURN
+			    _Max + _Nudge
+		displayFolder: Measures\Scatterplot
+		lineageTag: 967dcd8d-b2b8-4491-9b98-33e8eab20145
+
+	/// Lower Y bound for the product-grain CY-vs-PY scatter (Revenue PY axis).
+	/// Padded so the bottom bubble is not clipped against the plot edge.
+	measure 'Scatter Product Revenue PY Y Min' =
+			VAR _Pad = 0.08
+			VAR _Points =
+			    FILTER (
+			        ADDCOLUMNS (
+			            VALUES ( Product[Product Name] ),
+			            "@Y", [Revenue PY]
+			        ),
+			        NOT ISBLANK ( [@Y] )
+			    )
+			VAR _Min = MINX ( _Points, [@Y] )
+			VAR _Max = MAXX ( _Points, [@Y] )
+			VAR _Range = _Max - _Min
+			VAR _Nudge =
+			    IF ( _Range = 0, ABS ( _Max ) * 0.1, _Range * _Pad )
+			RETURN
+			    _Min - _Nudge
+		displayFolder: Measures\Scatterplot
+		lineageTag: 967dcd8d-b2b8-4491-9b98-33e8eab20146
+
+	/// Upper Y bound for the product-grain CY-vs-PY scatter.
+	/// Mirror of Scatter Product Revenue PY Y Min.
+	measure 'Scatter Product Revenue PY Y Max' =
+			VAR _Pad = 0.08
+			VAR _Points =
+			    FILTER (
+			        ADDCOLUMNS (
+			            VALUES ( Product[Product Name] ),
+			            "@Y", [Revenue PY]
+			        ),
+			        NOT ISBLANK ( [@Y] )
+			    )
+			VAR _Min = MINX ( _Points, [@Y] )
+			VAR _Max = MAXX ( _Points, [@Y] )
+			VAR _Range = _Max - _Min
+			VAR _Nudge =
+			    IF ( _Range = 0, ABS ( _Max ) * 0.1, _Range * _Pad )
+			RETURN
+			    _Max + _Nudge
+		displayFolder: Measures\Scatterplot
+		lineageTag: 967dcd8d-b2b8-4491-9b98-33e8eab20147
 
 	column 'Billing Document Number'
 		dataType: string

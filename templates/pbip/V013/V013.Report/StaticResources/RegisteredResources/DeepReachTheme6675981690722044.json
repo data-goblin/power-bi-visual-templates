@@ -668,7 +668,52 @@
             "gridlineShow": false,
             "gridlineStyle": "dotted",
             "concatenateLabels": false,
-            "maxMarginFactor": 50
+            "maxMarginFactor": 50,
+            "titleColor": {
+              "solid": {
+                "color": "#6B7B8D"
+              }
+            },
+            "titleFontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10.5D"
+                }
+              }
+            },
+            "titleFontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Segoe UI Semibold'"
+                }
+              }
+            },
+            "labelColor": {
+              "solid": {
+                "color": "#6B7B8D"
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9L"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Segoe UI'"
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1L"
+                }
+              }
+            }
           }
         ],
         "valueAxis": [
@@ -685,17 +730,52 @@
             "gridlineThickness": 1,
             "sharedAxis": true,
             "logAxisScale": false,
-            "titleFontFamily": "Segoe UI",
-            "fontFamily": "Segoe UI Semibold",
+            "titleFontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Segoe UI Semibold'"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Segoe UI'"
+                }
+              }
+            },
             "fontSize": 9,
-            "titleFontSize": 9,
+            "titleFontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10.5D"
+                }
+              }
+            },
             "switchAxisPosition": false,
             "bold": false,
             "titleBold": false,
             "italic": false,
             "titleItalic": false,
             "underline": false,
-            "titleUnderline": false
+            "titleUnderline": false,
+            "titleColor": {
+              "solid": {
+                "color": "#6B7B8D"
+              }
+            },
+            "labelColor": {
+              "solid": {
+                "color": "#6B7B8D"
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1L"
+                }
+              }
+            }
           }
         ],
         "y2Axis": [
@@ -1102,19 +1182,15 @@
             "right": 0
           }
         ],
-        "outline": [
+        "shape": [
           {
-            "show": false
-          }
-        ],
-        "title": [
-          {
-            "show": false
-          }
-        ],
-        "border": [
-          {
-            "show": false
+            "roundEdge": {
+              "expr": {
+                "Literal": {
+                  "Value": "0L"
+                }
+              }
+            }
           }
         ]
       }
@@ -1349,13 +1425,6 @@
         ],
         "valueAxis": [
           {
-            "labelDisplayUnits": {
-              "expr": {
-                "Literal": {
-                  "Value": "1D"
-                }
-              }
-            },
             "fontSize": {
               "expr": {
                 "Literal": {
@@ -1647,7 +1716,14 @@
         "bubbles": [
           {
             "bubbleSize": -10,
-            "markerRangeType": "auto"
+            "markerRangeType": "auto",
+            "markerShape": {
+              "expr": {
+                "Literal": {
+                  "Value": "'circle'"
+                }
+              }
+            }
           }
         ],
         "general": [
@@ -1676,6 +1752,56 @@
             "gridlineColor": {
               "solid": {
                 "color": "#DDE2E8"
+              }
+            },
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        ],
+        "valueAxis": [
+          {
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        ],
+        "markers": [
+          {
+            "borderColorMatchFill": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "borderShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "rotation": {
+              "expr": {
+                "Literal": {
+                  "Value": "0L"
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "50L"
+                }
               }
             }
           }

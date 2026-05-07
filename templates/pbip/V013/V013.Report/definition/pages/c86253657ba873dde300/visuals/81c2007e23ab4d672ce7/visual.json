@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
-  "name": "b93d774099c126e6308b",
+  "name": "81c2007e23ab4d672ce7",
   "position": {
     "x": 10,
     "y": 10,
@@ -29,6 +29,24 @@
               "queryRef": "Product.Product Name",
               "nativeQueryRef": "Product Name",
               "active": true
+            }
+          ]
+        },
+        "Size": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Shipments"
+                    }
+                  },
+                  "Property": "# Units Sold"
+                }
+              },
+              "queryRef": "Shipments.# Units Sold",
+              "nativeQueryRef": "# Units Sold"
             }
           ]
         },
@@ -94,18 +112,6 @@
                 }
               }
             },
-            "end": {
-              "expr": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Shipments"
-                    }
-                  },
-                  "Property": "Scatter Product Revenue Max"
-                }
-              }
-            },
             "showAxisTitle": {
               "expr": {
                 "Literal": {
@@ -135,6 +141,13 @@
               "expr": {
                 "Literal": {
                   "Value": "'''Segoe UI Semibold'', wf_segoe-ui_semibold, helvetica, arial, sans-serif'"
+                }
+              }
+            },
+            "end": {
+              "expr": {
+                "Literal": {
+                  "Value": "5200000000D"
                 }
               }
             },
@@ -344,6 +357,13 @@
                   "Value": "1D"
                 }
               }
+            },
+            "shadeShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
             }
           },
           "selector": {
@@ -389,6 +409,39 @@
               "expr": {
                 "Literal": {
                   "Value": "'auto'"
+                }
+              }
+            },
+            "bubbleSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "-6L"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "plotAreaShading": [
+        {
+          "properties": {
+            "displayName": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Symmetry shading 1'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "ratioLine": [
+        {
+          "properties": {
+            "displayName": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Ratio line 1'"
                 }
               }
             }
@@ -455,7 +508,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Revenue and Gross Margin % by Product'"
+                  "Value": "'Revenue, Gross Margin % and # Units Sold by Product'"
                 }
               }
             }

@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
-  "name": "6961c964d5002930e420",
+  "name": "3160bf58597b742d6d4d",
   "position": {
-    "x": 1262.5,
-    "y": 155,
-    "z": 1001,
-    "height": 412.5,
-    "width": 412.5,
-    "tabOrder": 1001
+    "x": 579.090909090909,
+    "y": 130,
+    "z": 1000,
+    "height": 409.99999999999994,
+    "width": 409.99999999999994,
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "shape",
@@ -45,16 +45,22 @@
           }
         }
       ],
+      "outline": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
       "fill": [
         {
           "properties": {
-            "transparency": {
-              "expr": {
-                "Literal": {
-                  "Value": "50D"
-                }
-              }
-            },
             "fillColor": {
               "solid": {
                 "color": {
@@ -66,10 +72,45 @@
                   }
                 }
               }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "49D"
+                }
+              }
             }
           },
           "selector": {
             "id": "default"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
           }
         }
       ]

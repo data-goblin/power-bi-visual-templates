@@ -2,8 +2,8 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
   "name": "3fbbee70c9d05a8d8d8a",
   "position": {
-    "x": 20,
-    "y": 20,
+    "x": 10,
+    "y": 10,
     "z": 0,
     "height": 530,
     "width": 500,
@@ -97,7 +97,7 @@
                       "Entity": "Shipments"
                     }
                   },
-                  "Property": "Scatter Product Revenue X Min"
+                  "Property": "Scatter Product Revenue Min"
                 }
               }
             },
@@ -109,7 +109,7 @@
                       "Entity": "Shipments"
                     }
                   },
-                  "Property": "Scatter Product Revenue X Max"
+                  "Property": "Scatter Product Revenue Max"
                 }
               }
             },
@@ -135,6 +135,20 @@
                       "Value": "'#6B7B8D'"
                     }
                   }
+                }
+              }
+            },
+            "gridlineShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "titleFontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'''Segoe UI Semibold'', wf_segoe-ui_semibold, helvetica, arial, sans-serif'"
                 }
               }
             }
@@ -390,6 +404,41 @@
                       "Value": "'#6B7B8D'"
                     }
                   }
+                }
+              }
+            },
+            "titleFontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'''Segoe UI Semibold'', wf_segoe-ui_semibold, helvetica, arial, sans-serif'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Revenue and Gross Margin % by Product'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Each ● is a product'"
                 }
               }
             }

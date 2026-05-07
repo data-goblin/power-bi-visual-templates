@@ -374,7 +374,7 @@ table Shipments
 
 	/// Lower X bound for the customer-grain CY-vs-PY scatter. Iterates customers
 	/// and pads outward so the leftmost bubble is not clipped.
-	measure 'Scatter Customer Revenue X Min' =
+	measure 'Scatter Customer Revenue Min' =
 			VAR _Pad = 0.08
 			VAR _Points =
 			    FILTER (
@@ -395,8 +395,8 @@ table Shipments
 		lineageTag: 967dcd8d-b2b8-4491-9b98-33e8eab20140
 
 	/// Upper X bound for the customer-grain CY-vs-PY scatter.
-	/// Mirror of Scatter Customer Revenue X Min.
-	measure 'Scatter Customer Revenue X Max' =
+	/// Mirror of Scatter Customer Revenue Min.
+	measure 'Scatter Customer Revenue Max' =
 			VAR _Pad = 0.08
 			VAR _Points =
 			    FILTER (
@@ -418,7 +418,7 @@ table Shipments
 
 	/// Lower Y bound for the customer-grain CY-vs-PY scatter (Revenue PY axis).
 	/// Padded so the bottom bubble is not clipped against the plot edge.
-	measure 'Scatter Customer Revenue PY Y Min' =
+	measure 'Scatter Customer Revenue PY Min' =
 			VAR _Pad = 0.08
 			VAR _Points =
 			    FILTER (
@@ -439,8 +439,8 @@ table Shipments
 		lineageTag: 967dcd8d-b2b8-4491-9b98-33e8eab20142
 
 	/// Upper Y bound for the customer-grain CY-vs-PY scatter.
-	/// Mirror of Scatter Customer Revenue PY Y Min.
-	measure 'Scatter Customer Revenue PY Y Max' =
+	/// Mirror of Scatter Customer Revenue PY Min.
+	measure 'Scatter Customer Revenue PY Max' =
 			VAR _Pad = 0.08
 			VAR _Points =
 			    FILTER (
@@ -462,7 +462,7 @@ table Shipments
 
 	/// Lower X bound for the product-grain CY-vs-PY scatter. Iterates products
 	/// and pads outward so the leftmost bubble is not clipped.
-	measure 'Scatter Product Revenue X Min' =
+	measure 'Scatter Product Revenue Min' =
 			VAR _Pad = 0.08
 			VAR _Points =
 			    FILTER (
@@ -483,8 +483,8 @@ table Shipments
 		lineageTag: 967dcd8d-b2b8-4491-9b98-33e8eab20144
 
 	/// Upper X bound for the product-grain CY-vs-PY scatter.
-	/// Mirror of Scatter Product Revenue X Min.
-	measure 'Scatter Product Revenue X Max' =
+	/// Mirror of Scatter Product Revenue Min.
+	measure 'Scatter Product Revenue Max' =
 			VAR _Pad = 0.08
 			VAR _Points =
 			    FILTER (
@@ -506,7 +506,7 @@ table Shipments
 
 	/// Lower Y bound for the product-grain CY-vs-PY scatter (Revenue PY axis).
 	/// Padded so the bottom bubble is not clipped against the plot edge.
-	measure 'Scatter Product Revenue PY Y Min' =
+	measure 'Scatter Product Revenue PY Min' =
 			VAR _Pad = 0.08
 			VAR _Points =
 			    FILTER (
@@ -527,8 +527,8 @@ table Shipments
 		lineageTag: 967dcd8d-b2b8-4491-9b98-33e8eab20146
 
 	/// Upper Y bound for the product-grain CY-vs-PY scatter.
-	/// Mirror of Scatter Product Revenue PY Y Min.
-	measure 'Scatter Product Revenue PY Y Max' =
+	/// Mirror of Scatter Product Revenue PY Min.
+	measure 'Scatter Product Revenue PY Max' =
 			VAR _Pad = 0.08
 			VAR _Points =
 			    FILTER (

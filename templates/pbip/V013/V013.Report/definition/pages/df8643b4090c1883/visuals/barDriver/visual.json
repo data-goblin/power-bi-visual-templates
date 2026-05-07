@@ -1,19 +1,19 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
-  "name": "6779a605d02d4072488b",
+  "name": "barDriver",
   "position": {
-    "x": 20,
-    "y": 20,
+    "x": 530,
+    "y": 10,
     "z": 0,
-    "height": 600,
-    "width": 600,
+    "height": 530,
+    "width": 500,
     "tabOrder": 0
   },
   "visual": {
-    "visualType": "tableEx",
+    "visualType": "clusteredBarChart",
     "query": {
       "queryState": {
-        "Values": {
+        "Category": {
           "projections": [
             {
               "field": {
@@ -27,22 +27,13 @@
                 }
               },
               "queryRef": "Product.Product Name",
-              "nativeQueryRef": "Product Name"
-            },
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Product"
-                    }
-                  },
-                  "Property": "Type"
-                }
-              },
-              "queryRef": "Product.Type",
-              "nativeQueryRef": "Type"
-            },
+              "nativeQueryRef": "Product Name",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
             {
               "field": {
                 "Measure": {
@@ -56,34 +47,6 @@
               },
               "queryRef": "Shipments.Revenue",
               "nativeQueryRef": "Revenue"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Shipments"
-                    }
-                  },
-                  "Property": "Gross Profit"
-                }
-              },
-              "queryRef": "Shipments.Gross Profit",
-              "nativeQueryRef": "Gross Profit"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Shipments"
-                    }
-                  },
-                  "Property": "Gross Margin %"
-                }
-              },
-              "queryRef": "Shipments.Gross Margin %",
-              "nativeQueryRef": "Gross Margin %"
             }
           ]
         }
@@ -103,17 +66,38 @@
             },
             "direction": "Descending"
           }
-        ]
+        ],
+        "isDefaultSort": true
       }
     },
     "visualContainerObjects": {
-      "border": [
+      "title": [
         {
           "properties": {
-            "radius": {
+            "show": {
               "expr": {
                 "Literal": {
-                  "Value": "6D"
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Click a product'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }

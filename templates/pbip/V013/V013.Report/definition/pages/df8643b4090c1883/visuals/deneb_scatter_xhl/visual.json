@@ -1,0 +1,179 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "name": "deneb_scatter_xhl",
+  "position": {
+    "x": 10,
+    "y": 10,
+    "z": 0,
+    "height": 530,
+    "width": 500,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "deneb7E15AEF80B9E4D4F8E12924291ECE89A",
+    "query": {
+      "queryState": {
+        "dataset": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Product"
+                    }
+                  },
+                  "Property": "Product Name"
+                }
+              },
+              "queryRef": "Product.Product Name",
+              "nativeQueryRef": "Product Name"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Shipments"
+                    }
+                  },
+                  "Property": "Revenue"
+                }
+              },
+              "queryRef": "Shipments.Revenue",
+              "nativeQueryRef": "Revenue"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Shipments"
+                    }
+                  },
+                  "Property": "Gross Margin %"
+                }
+              },
+              "queryRef": "Shipments.Gross Margin %",
+              "nativeQueryRef": "Gross Margin %"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "vega": [
+        {
+          "properties": {
+            "provider": {
+              "expr": {
+                "Literal": {
+                  "Value": "'vegaLite'"
+                }
+              }
+            },
+            "jsonSpec": {
+              "expr": {
+                "Literal": {
+                  "Value": "'{\n  \"$schema\": \"https://vega.github.io/schema/vega-lite/v5.json\",\n  \"data\": {\"name\": \"dataset\"},\n  \"encoding\": {\n    \"x\": {\n      \"field\": \"Revenue\",\n      \"type\": \"quantitative\",\n      \"axis\": {\"title\": \"Revenue\", \"format\": \"$,.2s\"}\n    },\n    \"y\": {\n      \"field\": \"Gross Margin %\",\n      \"type\": \"quantitative\",\n      \"axis\": {\"title\": \"Gross Margin %\", \"format\": \".0%\"}\n    },\n    \"tooltip\": [\n      {\"field\": \"Product Name\", \"type\": \"nominal\", \"title\": \"Product\"},\n      {\"field\": \"Revenue\", \"type\": \"quantitative\", \"format\": \"$,.0f\"},\n      {\"field\": \"Gross Margin %\", \"type\": \"quantitative\", \"format\": \".1%\"}\n    ]\n  },\n  \"layer\": [\n    {\n      \"description\": \"Neutral points\",\n      \"mark\": {\"type\": \"circle\", \"tooltip\": true},\n      \"encoding\": {\"opacity\": {\"value\": 0.2}}\n    },\n    {\n      \"description\": \"Selected points\",\n      \"mark\": {\"type\": \"circle\", \"tooltip\": true},\n      \"encoding\": {\n        \"opacity\": {\n          \"condition\": {\"test\": {\"field\": \"__selected__\", \"equal\": \"on\"}, \"value\": 1},\n          \"value\": 0\n        }\n      }\n    },\n    {\n      \"description\": \"Cross-highlighted points\",\n      \"mark\": {\"type\": \"circle\", \"tooltip\": true},\n      \"encoding\": {\n        \"opacity\": {\n          \"condition\": {\"test\": \"datum[''Gross Margin %__highlightStatus''] === ''on'' && datum[''Gross Margin %__highlight''] !== null\", \"value\": 1},\n          \"value\": 0\n        }\n      }\n    }\n  ]\n}\n'"
+                }
+              }
+            },
+            "jsonConfig": {
+              "expr": {
+                "Literal": {
+                  "Value": "'{\n  \"autosize\": {\"type\": \"fit\", \"contains\": \"padding\"},\n  \"padding\": {\"top\": 5, \"right\": 15, \"bottom\": 5, \"left\": 5},\n  \"view\": {\"stroke\": \"transparent\"},\n  \"font\": \"Segoe UI\",\n  \"circle\": {\n    \"fill\": {\"expr\": \"pbiColor(2)\"},\n    \"stroke\": {\"expr\": \"pbiColor(2)\"},\n    \"fillOpacity\": 0.5,\n    \"strokeOpacity\": 1,\n    \"strokeWidth\": 1,\n    \"size\": 220\n  },\n  \"axis\": {\n    \"ticks\": false,\n    \"domain\": false,\n    \"labelColor\": \"#1E2A35\",\n    \"labelFont\": \"Segoe UI\",\n    \"labelFontSize\": 12,\n    \"titleColor\": \"#6B7B8D\",\n    \"titleFont\": \"Segoe UI Semibold\",\n    \"titleFontSize\": 11,\n    \"titleFontWeight\": \"normal\",\n    \"titlePadding\": 10\n  },\n  \"axisQuantitative\": {\n    \"grid\": true,\n    \"gridColor\": \"#DDE2E8\",\n    \"gridDash\": [],\n    \"gridWidth\": 1,\n    \"tickCount\": 5,\n    \"labelFlush\": false\n  },\n  \"axisX\": {\"labelPadding\": 5},\n  \"axisY\": {\"labelPadding\": 8}\n}\n'"
+                }
+              }
+            },
+            "isNewDialogOpen": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "enableTooltips": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "enableContextMenu": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "enableSelection": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "enableHighlight": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "selectionMaxDataPoints": {
+              "expr": {
+                "Literal": {
+                  "Value": "50D"
+                }
+              }
+            },
+            "version": {
+              "expr": {
+                "Literal": {
+                  "Value": "'5.20.1'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "developer": [
+        {
+          "properties": {
+            "version": {
+              "expr": {
+                "Literal": {
+                  "Value": "'1.7.1.0'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Revenue x GM% by Product (Deneb, cross-highlight)'"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
-  "name": "6980349568b00408d876",
+  "name": "7f9028599a2f2347a54a",
   "position": {
-    "x": 540,
-    "y": 20,
-    "z": 1000,
-    "height": 540,
+    "x": 10,
+    "y": 10,
+    "z": 0,
+    "height": 580,
     "width": 500,
-    "tabOrder": 1000
+    "tabOrder": 0
   },
   "visual": {
     "visualType": "scatterChart",
@@ -42,11 +42,11 @@
                       "Entity": "Shipments"
                     }
                   },
-                  "Property": "Revenue YoY % Abs"
+                  "Property": "# Units Sold"
                 }
               },
-              "queryRef": "Shipments.Revenue YoY % Abs",
-              "nativeQueryRef": "Revenue YoY % Abs"
+              "queryRef": "Shipments.# Units Sold",
+              "nativeQueryRef": "# Units Sold"
             }
           ]
         },
@@ -78,11 +78,11 @@
                       "Entity": "Shipments"
                     }
                   },
-                  "Property": "Revenue"
+                  "Property": "Revenue PY"
                 }
               },
-              "queryRef": "Shipments.Revenue",
-              "nativeQueryRef": "Revenue",
+              "queryRef": "Shipments.Revenue PY",
+              "nativeQueryRef": "Revenue PY",
               "active": true
             }
           ]
@@ -97,11 +97,11 @@
                       "Entity": "Shipments"
                     }
                   },
-                  "Property": "Revenue PY"
+                  "Property": "Revenue"
                 }
               },
-              "queryRef": "Shipments.Revenue PY",
-              "nativeQueryRef": "Revenue PY"
+              "queryRef": "Shipments.Revenue",
+              "nativeQueryRef": "Revenue"
             }
           ]
         }
@@ -137,7 +137,7 @@
                 "color": {
                   "expr": {
                     "ThemeDataColor": {
-                      "ColorId": 3,
+                      "ColorId": 2,
                       "Percent": 0
                     }
                   }
@@ -149,7 +149,7 @@
                 "color": {
                   "expr": {
                     "ThemeDataColor": {
-                      "ColorId": 2,
+                      "ColorId": 3,
                       "Percent": 0
                     }
                   }
@@ -179,14 +179,14 @@
             "titleText": {
               "expr": {
                 "Literal": {
-                  "Value": "'PY'"
+                  "Value": "'Current Year'"
                 }
               }
             },
             "gridlineShow": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -205,7 +205,7 @@
                       "Entity": "Shipments"
                     }
                   },
-                  "Property": "Scatter Customer Revenue PY Y Min"
+                  "Property": "Scatter Customer Revenue Min"
                 }
               }
             },
@@ -217,14 +217,14 @@
                       "Entity": "Shipments"
                     }
                   },
-                  "Property": "Scatter Customer Revenue PY Y Max"
+                  "Property": "Scatter Customer Revenue Max"
                 }
               }
             },
             "titleFontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "10D"
+                  "Value": "11D"
                 }
               }
             },
@@ -236,6 +236,13 @@
                       "Value": "'#6B7B8D'"
                     }
                   }
+                }
+              }
+            },
+            "titleFontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'''Segoe UI Semibold'', wf_segoe-ui_semibold, helvetica, arial, sans-serif'"
                 }
               }
             }
@@ -262,7 +269,7 @@
             "titleText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Current Year'"
+                  "Value": "'Prior Year'"
                 }
               }
             },
@@ -274,7 +281,7 @@
                       "Entity": "Shipments"
                     }
                   },
-                  "Property": "Scatter Customer Revenue X Min"
+                  "Property": "Scatter Customer Revenue PY Min"
                 }
               }
             },
@@ -286,7 +293,7 @@
                       "Entity": "Shipments"
                     }
                   },
-                  "Property": "Scatter Customer Revenue X Max"
+                  "Property": "Scatter Customer Revenue PY Max"
                 }
               }
             },
@@ -307,6 +314,27 @@
                   }
                 }
               }
+            },
+            "titleFontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'''Segoe UI Semibold'', wf_segoe-ui_semibold, helvetica, arial, sans-serif'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "gridlineShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
             }
           }
         }
@@ -318,13 +346,49 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "Shipments"
+                    "FillRule": {
+                      "Input": {
+                        "Measure": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "Shipments"
+                            }
+                          },
+                          "Property": "Revenue YoY %"
                         }
                       },
-                      "Property": "Product Revenue YoY Color"
+                      "FillRule": {
+                        "linearGradient3": {
+                          "min": {
+                            "color": {
+                              "Literal": {
+                                "Value": "'minColor'"
+                              }
+                            }
+                          },
+                          "mid": {
+                            "color": {
+                              "Literal": {
+                                "Value": "'#6B7B8D'"
+                              }
+                            }
+                          },
+                          "max": {
+                            "color": {
+                              "Literal": {
+                                "Value": "'maxColor'"
+                              }
+                            }
+                          },
+                          "nullColoringStrategy": {
+                            "strategy": {
+                              "Literal": {
+                                "Value": "'asZero'"
+                              }
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -402,7 +466,53 @@
             "titleText": {
               "expr": {
                 "Literal": {
-                  "Value": "'YoY %'"
+                  "Value": "'YoY'"
+                }
+              }
+            },
+            "labelColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#6B7B8D'"
+                    }
+                  }
+                }
+              }
+            },
+            "position": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Top'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Revenue, Revenue Prior Year and # Units Sold by Customer'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Each ● is a customer. Above the diagonal means revenue grew YoY.'"
                 }
               }
             }
